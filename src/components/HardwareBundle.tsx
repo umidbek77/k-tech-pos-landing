@@ -1,20 +1,23 @@
-import { useLanguage } from '@/contexts/LanguageContext';
-import { motion } from 'framer-motion';
-import { Monitor, Printer, ScanBarcode, Archive, ShieldCheck } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
+import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import { ShieldCheck } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const HardwareBundle = () => {
   const { t } = useLanguage();
 
   const items = [
-    { icon: Monitor, label: 'Monoblok' },
-    { icon: Printer, label: 'Termal Printer' },
-    { icon: ScanBarcode, label: 'Skaner' },
-    { icon: Archive, label: 'Kassa qutisi' },
+    { image: "/public/monoblok.png", label: "Monoblok" },
+    { image: "/public/print.png", label: "Termal Printer" },
+    { image: "/public/scan.png", label: "Skaner" },
+    { image: "/public/scale.png", label: "Kassa qutisi" },
   ];
 
   return (
-    <section id="hardware" className="py-20 bg-muted/50">
+    <section
+      id="hardware"
+      className="py-28 bg-background relative overflow-hidden"
+    >
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -22,32 +25,51 @@ const HardwareBundle = () => {
           viewport={{ once: true }}
           className="text-3xl md:text-4xl font-bold text-center mb-4 text-foreground"
         >
-          {t('hardware.title')}
+          {t("hardware.title")}
         </motion.h2>
-        <p className="text-center text-muted-foreground mb-12">{t('hardware.desc')}</p>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-8">
+        <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+          {t("hardware.desc")}
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto mb-14">
           {items.map((item, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-card rounded-xl border border-border p-6 flex flex-col items-center gap-3 hover:shadow-lg transition-shadow"
+              className="group bg-card border border-border rounded-3xl p-8 flex flex-col items-center justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-                <item.icon className="h-7 w-7 text-primary" />
+              {/* Image */}
+              <div className="relative w-full h-36 flex items-center justify-center mb-6">
+                <img
+                  src={item.image}
+                  alt={item.label}
+                  className="max-h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                />
+
+                {/* Soft glow */}
+                <div className="absolute -z-10 w-24 h-24 bg-primary/20 blur-2xl rounded-full" />
               </div>
-              <span className="text-sm font-semibold text-foreground text-center">{item.label}</span>
+
+              {/* Label */}
+              <span className="text-sm md:text-base font-semibold text-foreground text-center">
+                {item.label}
+              </span>
             </motion.div>
           ))}
         </div>
 
+        {/* Warranty Badge */}
         <div className="flex justify-center">
-          <Badge variant="secondary" className="px-4 py-2 text-sm bg-accent text-accent-foreground border-0">
+          <Badge
+            variant="outline"
+            className="px-6 py-3 text-sm rounded-full border-primary/30 bg-primary/10 text-primary shadow-md"
+          >
             <ShieldCheck className="h-4 w-4 mr-2" />
-            {t('hardware.warranty')}
+            {t("hardware.warranty")}
           </Badge>
         </div>
       </div>

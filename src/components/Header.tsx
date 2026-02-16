@@ -5,7 +5,6 @@ import { Monitor, Menu, X, Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const flags: Record<string, string> = { uz: '🇺🇿', ru: '🇷🇺', en: '🇬🇧' };
 const langLabels: Record<string, string> = { uz: 'UZ', ru: 'RU', en: 'EN' };
 
 const Header = () => {
@@ -41,7 +40,7 @@ const Header = () => {
             <button
               key={item.href}
               onClick={() => scrollTo(item.href)}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className="text-md font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {item.label}
             </button>
@@ -60,7 +59,7 @@ const Header = () => {
                   lang === l ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
-                {flags[l]} {langLabels[l]}
+               {langLabels[l]}
               </button>
             ))}
           </div>
@@ -115,7 +114,7 @@ const Header = () => {
                       lang === l ? 'bg-primary text-primary-foreground' : 'border border-border text-muted-foreground'
                     }`}
                   >
-                    {flags[l]} {langLabels[l]}
+                   {langLabels[l]}
                   </button>
                 ))}
                 <Button variant="ghost" size="icon" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>

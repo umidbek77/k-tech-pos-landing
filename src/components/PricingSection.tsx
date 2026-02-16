@@ -1,8 +1,8 @@
-import { useLanguage } from '@/contexts/LanguageContext';
-import { motion } from 'framer-motion';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Check, Star, Zap, Crown } from 'lucide-react';
+import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Check, Star, Zap, Crown } from "lucide-react";
 
 const PricingSection = () => {
   const { t } = useLanguage();
@@ -10,81 +10,131 @@ const PricingSection = () => {
   const plans = [
     {
       icon: Zap,
-      name: t('pricing.start'),
-      price: t('pricing.startPrice'),
-      desc: t('pricing.startDesc'),
-      features: [t('pricing.feature1'), t('pricing.feature2')],
+      name: t("pricing.start"),
+      price: "120 000 so’m",
+      desc: t("pricing.startDesc"),
+      features: [
+        t("pricing.feature1"),
+        t("pricing.feature2"),
+        "1 kassa terminali",
+        "Asosiy hisobotlar",
+        "Email qo‘llab-quvvatlash",
+      ],
       popular: false,
     },
     {
       icon: Star,
-      name: t('pricing.business'),
-      price: t('pricing.businessPrice'),
-      desc: t('pricing.businessDesc'),
-      features: [t('pricing.feature3'), t('pricing.feature4'), t('pricing.feature2')],
+      name: t("pricing.business"),
+      price: "200 000 so’m",
+      desc: t("pricing.businessDesc"),
+      features: [
+        t("pricing.feature3"),
+        t("pricing.feature4"),
+        t("pricing.feature2"),
+        "Cheksiz mahsulot",
+        "AI tavsiyalar",
+        "Telegram bot integratsiya",
+        "Real-time monitoring",
+      ],
       popular: true,
     },
     {
       icon: Crown,
-      name: t('pricing.enterprise'),
-      price: t('pricing.enterprisePrice'),
-      desc: t('pricing.enterpriseDesc'),
-      features: [t('pricing.feature5'), t('pricing.feature4'), t('pricing.feature6')],
+      name: t("pricing.enterprise"),
+      price: "300 000 so’m",
+      desc: t("pricing.enterpriseDesc"),
+      features: [
+        t("pricing.feature5"),
+        t("pricing.feature4"),
+        t("pricing.feature6"),
+        "Multi-branch boshqaruv",
+        "Maxsus integratsiyalar",
+        "Shaxsiy menejer",
+        "24/7 premium support",
+      ],
       popular: false,
     },
   ];
 
   return (
-    <section id="pricing" className="py-20">
+    <section
+      id="pricing"
+      className="py-28 bg-muted/30 relative overflow-hidden"
+    >
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <Badge variant="secondary" className="mb-4 bg-accent text-accent-foreground border-0">
-            {t('social.badge')}
+          <Badge
+            variant="secondary"
+            className="mb-4 bg-accent text-accent-foreground border-0 px-4 py-1"
+          >
+            {t("social.badge")}
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">{t('pricing.title')}</h2>
-          <p className="text-muted-foreground">{t('pricing.note')}</p>
+
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+            {t("pricing.title")}
+          </h2>
+
+          <p className="text-muted-foreground">{t("pricing.note")}</p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className={`relative bg-card rounded-xl border p-6 flex flex-col ${
-                plan.popular ? 'border-primary shadow-xl scale-105' : 'border-border'
-              }`}
+              transition={{ delay: i * 0.15 }}
+              whileHover={{ y: -8 }}
+              className="relative bg-card rounded-2xl border border-border shadow-lg p-8 flex flex-col transition-all duration-300 hover:shadow-2xl"
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <Badge className="bg-primary text-primary-foreground border-0">⭐ Popular</Badge>
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <Badge className="flex items-center gap-1 bg-primary text-primary-foreground border-0 px-4 py-1">
+                    <Star className="h-3 w-3" />
+                    Eng mashhur
+                  </Badge>
                 </div>
               )}
-              <plan.icon className={`h-8 w-8 mb-4 ${plan.popular ? 'text-primary' : 'text-muted-foreground'}`} />
-              <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{plan.desc}</p>
-              <p className="text-2xl font-bold text-foreground mb-6">{plan.price}</p>
-              <ul className="space-y-2 mb-6 flex-1">
+
+              <plan.icon className="h-10 w-10 mb-6 text-primary" />
+
+              <h3 className="text-xl font-bold text-foreground mb-2">
+                {plan.name}
+              </h3>
+
+              <p className="text-sm text-muted-foreground mb-6">{plan.desc}</p>
+
+              <p className="text-3xl font-bold text-foreground mb-8">
+                {plan.price}
+              </p>
+
+              <ul className="space-y-3 mb-8 flex-1">
                 {plan.features.map((f, fi) => (
-                  <li key={fi} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Check className="h-4 w-4 text-primary flex-shrink-0" />
+                  <li
+                    key={fi}
+                    className="flex items-start gap-3 text-sm text-muted-foreground"
+                  >
+                    <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                     {f}
                   </li>
                 ))}
               </ul>
+
               <Button
-                className={plan.popular ? 'bg-primary text-primary-foreground' : ''}
-                variant={plan.popular ? 'default' : 'outline'}
-                onClick={() => document.querySelector('#demo')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={() =>
+                  document
+                    .querySelector("#demo")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
-                {t('nav.demo')}
+                {t("nav.demo")}
               </Button>
             </motion.div>
           ))}
