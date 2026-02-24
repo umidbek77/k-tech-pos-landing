@@ -59,23 +59,23 @@ const PricingSection = () => {
   return (
     <section
       id="pricing"
-      className="py-28 bg-muted/30 relative overflow-hidden"
+      className="py-20 bg-muted/30 relative overflow-hidden"
     >
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10"
         >
-          <Badge
-            variant="secondary"
-            className="mb-4 bg-accent text-accent-foreground border-0 px-4 py-1"
-          >
-            {t("social.badge")}
-          </Badge>
+          {/*<Badge*/}
+          {/*  variant="secondary"*/}
+          {/*  className="mb-4 bg-accent text-accent-foreground border-0 px-4 py-1"*/}
+          {/*>*/}
+          {/*  {t("social.badge")}*/}
+          {/*</Badge>*/}
 
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
             {t("pricing.title")}
           </h2>
 

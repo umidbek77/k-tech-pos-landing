@@ -21,7 +21,36 @@ export type TranslationKey =
   | 'faq.q1' | 'faq.a1' | 'faq.q2' | 'faq.a2' | 'faq.q3' | 'faq.a3'
   | 'footer.slogan'
   | 'demo.title' | 'demo.name' | 'demo.phone' | 'demo.business' | 'demo.submit' | 'demo.success'
-  | 'demo.shop' | 'demo.supermarket' | 'demo.pharmacy' | 'demo.other';
+  | 'demo.shop' | 'demo.supermarket' | 'demo.pharmacy' | 'demo.other'| 'demo.employees'
+    | 'demo.branches'
+    | 'demo.plan'
+    | 'demo.note'
+  | 'devices.title' | 'devices.subtitle'
+  | 'devices.mobile' | 'devices.mobileDesc'
+  | 'devices.tablet' | 'devices.tabletDesc'
+  | 'devices.desktop' | 'devices.desktopDesc'
+  | 'devices.pos' | 'devices.posDesc'
+    | 'whyUs.title' | 'whyUs.subtitle'
+    | 'whyUs.reliability' | 'whyUs.reliabilityDesc'
+    | 'whyUs.scalability' | 'whyUs.scalabilityDesc'
+    | 'whyUs.support' | 'whyUs.supportDesc'
+    | 'whyUs.updates' | 'whyUs.updatesDesc'
+    | 'whyUs.training' | 'whyUs.trainingDesc'
+    | 'whyUs.integration' | 'whyUs.integrationDesc'
+    | 'industries.title' | 'industries.subtitle'
+    | 'industries.dealers' | 'industries.dealersDesc'
+    | 'industries.malls' | 'industries.mallsDesc'
+    | 'industries.hypermarkets' | 'industries.hypermarketsDesc'
+    | 'industries.supermarkets' | 'industries.supermarketsDesc'
+    | 'footer.product'
+    | 'footer.contact'
+    | 'footer.social'
+    | 'footer.privacy'
+    | 'footer.terms'
+    | 'footer.demo'
+    | 'footer.features'
+    | 'footer.pricing'
+    | 'footer.dashboard'
 
 type Translations = Record<string, Record<TranslationKey, string>>;
 
@@ -114,6 +143,53 @@ export const translations: Translations = {
     'demo.supermarket': 'Supermarket',
     'demo.pharmacy': 'Dorixona',
     'demo.other': 'Boshqa',
+      'demo.employees': 'Xodimlar soni',
+      'demo.branches': 'Filiallar soni',
+      'demo.plan': 'Qaysi tarif qiziqtiradi?',
+      'demo.note': 'Qo‘shimcha izoh...',
+      'devices.title': 'Barcha qurilmalarda mukammal ishlaydi',
+      'devices.subtitle': 'Bir tizim - cheksiz imkoniyatlar',
+      'devices.mobile': 'Mobil ilovalar',
+      'devices.mobileDesc': 'iOS va Android uchun native ilovalar',
+      'devices.tablet': 'Planshet',
+      'devices.tabletDesc': 'Ofitsiantlar va kurierlar uchun moslashgan',
+      'devices.desktop': 'Kompyuter',
+      'devices.desktopDesc': "To'liq funksional ish joyi",
+      'devices.pos': 'POS terminal',
+      'devices.posDesc': 'Maxsus kassalar uchun optimallashtirilgan',
+      'whyUs.title': 'Nima uchun Kharezmi Tech POS?',
+      'whyUs.subtitle': 'Bizni tanlaganingiz uchun 6 ta asosiy sabab',
+      'whyUs.reliability': 'Ishonchlilik',
+      'whyUs.reliabilityDesc': "99.9% uptime kafolati. Sizning biznesingiz hech qachon to'xtamaydi.",
+      'whyUs.scalability': 'Kengaytiruvchanlik',
+      'whyUs.scalabilityDesc': "1 dan 1000+ kassagacha oson o'sish imkoniyati.",
+      'whyUs.support': "24/7 qo'llab-quvvatlash",
+      'whyUs.supportDesc': 'Har qanday vaqtda yordam olish uchun bizning jamoamiz tayyor.',
+      'whyUs.updates': 'Bepul yangilanishlar',
+      'whyUs.updatesDesc': 'Yangi funksiyalar va yaxshilanishlar doimo bepul.',
+      'whyUs.training': "Bepul o'qitish",
+      'whyUs.trainingDesc': "Sizning jamoangizni professional darajada o'qitamiz.",
+      'whyUs.integration': 'Oson integratsiya',
+      'whyUs.integrationDesc': 'Mavjud tizimlaringiz bilan muammosiz integratsiya.',
+      'industries.title': "Kimlar uchun mo'ljallangan",
+      'industries.subtitle': 'Kharezmi Tech POS katta hajmli savdo bizneslariga maxsus moslashtirilgan',
+      'industries.dealers': 'Yirik dillerlar',
+      'industries.dealersDesc': "Katta hajmli savdo operatsiyalari uchun to'liq nazorat",
+      'industries.malls': 'Savdo markazlari',
+      'industries.mallsDesc': "Ko'p filiallarni boshqarish va markazlashtirilgan hisobotlar",
+      'industries.hypermarkets': 'Hypermarketlar',
+      'industries.hypermarketsDesc': 'Minglab mahsulotlarni oson boshqarish',
+      'industries.supermarkets': 'Supermarketlar',
+      'industries.supermarketsDesc': 'Tez xizmat va aniq inventarizatsiya',
+      'footer.product': 'Mahsulot',
+      'footer.contact': 'Aloqa',
+      'footer.social': 'Ijtimoiy tarmoqlar',
+      'footer.privacy': 'Maxfiylik siyosati',
+      'footer.terms': 'Foydalanish shartlari',
+      'footer.demo': "Demo so‘rash",
+      'footer.features': 'Imkoniyatlar',
+      'footer.pricing': 'Tariflar',
+      'footer.dashboard': 'Qurilmalar',
   },
   ru: {
     'nav.features': 'Возможности',
@@ -203,9 +279,56 @@ export const translations: Translations = {
     'demo.supermarket': 'Супермаркет',
     'demo.pharmacy': 'Аптека',
     'demo.other': 'Другое',
+      'demo.employees': 'Количество сотрудников',
+      'demo.branches': 'Количество филиалов',
+      'demo.plan': 'Какой тариф вас интересует?',
+      'demo.note': 'Дополнительный комментарий...',
+      'devices.title': 'Идеально работает на всех устройствах',
+      'devices.subtitle': 'Одна система — безграничные возможности',
+      'devices.mobile': 'Мобильные приложения',
+      'devices.mobileDesc': 'Нативные приложения для iOS и Android',
+      'devices.tablet': 'Планшет',
+      'devices.tabletDesc': 'Адаптирован для официантов и курьеров',
+      'devices.desktop': 'Компьютер',
+      'devices.desktopDesc': 'Полноценное рабочее место',
+      'devices.pos': 'POS терминал',
+      'devices.posDesc': 'Оптимизирован для специализированных касс',
+      'whyUs.title': 'Почему Kharezmi Tech POS?',
+      'whyUs.subtitle': '6 основных причин выбрать нас',
+      'whyUs.reliability': 'Надёжность',
+      'whyUs.reliabilityDesc': 'Гарантия 99.9% uptime. Ваш бизнес никогда не остановится.',
+      'whyUs.scalability': 'Масштабируемость',
+      'whyUs.scalabilityDesc': 'Лёгкий рост от 1 до 1000+ касс.',
+      'whyUs.support': 'Поддержка 24/7',
+      'whyUs.supportDesc': 'Наша команда готова помочь в любое время.',
+      'whyUs.updates': 'Бесплатные обновления',
+      'whyUs.updatesDesc': 'Новые функции и улучшения всегда бесплатно.',
+      'whyUs.training': 'Бесплатное обучение',
+      'whyUs.trainingDesc': 'Обучаем вашу команду на профессиональном уровне.',
+      'whyUs.integration': 'Лёгкая интеграция',
+      'whyUs.integrationDesc': 'Бесшовная интеграция с существующими системами.',
+      'industries.title': 'Для кого предназначено',
+      'industries.subtitle': 'Kharezmi Tech POS специально адаптирован для крупного ритейла',
+      'industries.dealers': 'Крупные дилеры',
+      'industries.dealersDesc': 'Полный контроль крупных торговых операций',
+      'industries.malls': 'Торговые центры',
+      'industries.mallsDesc': 'Управление несколькими филиалами и централизованные отчёты',
+      'industries.hypermarkets': 'Гипермаркеты',
+      'industries.hypermarketsDesc': 'Удобное управление тысячами товаров',
+      'industries.supermarkets': 'Супермаркеты',
+      'industries.supermarketsDesc': 'Быстрое обслуживание и точная инвентаризация',
+      'footer.product': 'Продукт',
+      'footer.contact': 'Контакты',
+      'footer.social': 'Социальные сети',
+      'footer.privacy': 'Политика конфиденциальности',
+      'footer.terms': 'Условия использования',
+      'footer.demo': 'Запросить демо',
+      'footer.features': 'Возможности',
+      'footer.pricing': 'Тарифы',
+      'footer.dashboard': 'Устройства',
   },
   en: {
-    'nav.features': 'Features',
+    'nav.features': 'WhyUs',
     'nav.solutions': 'Solutions',
     'nav.hardware': 'Hardware',
     'nav.pricing': 'Pricing',
@@ -292,5 +415,52 @@ export const translations: Translations = {
     'demo.supermarket': 'Supermarket',
     'demo.pharmacy': 'Pharmacy',
     'demo.other': 'Other',
+      'demo.employees': 'Number of employees',
+      'demo.branches': 'Number of branches',
+      'demo.plan': 'Which plan are you interested in?',
+      'demo.note': 'Additional notes...',
+      'devices.title': 'Perfect on All Devices',
+      'devices.subtitle': 'One system — unlimited possibilities',
+      'devices.mobile': 'Mobile Apps',
+      'devices.mobileDesc': 'Native apps for iOS and Android',
+      'devices.tablet': 'Tablet',
+      'devices.tabletDesc': 'Optimized for waiters and couriers',
+      'devices.desktop': 'Desktop',
+      'devices.desktopDesc': 'Fully functional workstation',
+      'devices.pos': 'POS Terminal',
+      'devices.posDesc': 'Optimized for dedicated cash registers',
+      'whyUs.title': 'Why Kharezmi Tech POS?',
+      'whyUs.subtitle': '6 key reasons to choose us',
+      'whyUs.reliability': 'Reliability',
+      'whyUs.reliabilityDesc': '99.9% uptime guarantee. Your business never stops.',
+      'whyUs.scalability': 'Scalability',
+      'whyUs.scalabilityDesc': 'Grow easily from 1 to 1000+ terminals.',
+      'whyUs.support': '24/7 Support',
+      'whyUs.supportDesc': 'Our team is ready to assist you anytime.',
+      'whyUs.updates': 'Free Updates',
+      'whyUs.updatesDesc': 'New features and improvements always free.',
+      'whyUs.training': 'Free Training',
+      'whyUs.trainingDesc': 'We train your team at a professional level.',
+      'whyUs.integration': 'Easy Integration',
+      'whyUs.integrationDesc': 'Seamless integration with your existing systems.',
+      'industries.title': 'Who It’s For',
+      'industries.subtitle': 'Kharezmi Tech POS is tailored for large-scale retail businesses',
+      'industries.dealers': 'Large Dealers',
+      'industries.dealersDesc': 'Full control of high-volume operations',
+      'industries.malls': 'Shopping Malls',
+      'industries.mallsDesc': 'Multi-branch management and centralized reporting',
+      'industries.hypermarkets': 'Hypermarkets',
+      'industries.hypermarketsDesc': 'Easily manage thousands of products',
+      'industries.supermarkets': 'Supermarkets',
+      'industries.supermarketsDesc': 'Fast service and accurate inventory tracking',
+      'footer.product': 'Product',
+      'footer.contact': 'Contact',
+      'footer.social': 'Social Media',
+      'footer.privacy': 'Privacy Policy',
+      'footer.terms': 'Terms of Service',
+      'footer.demo': 'Request Demo',
+      'footer.features': 'Opportunities',
+      'footer.pricing': 'Pricing',
+      'footer.dashboard': 'Devices',
   },
 };

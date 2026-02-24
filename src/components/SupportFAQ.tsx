@@ -18,7 +18,7 @@ const SupportFAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-20 bg-background">
+    <section id="faq" className="py-19 bg-background">
       <div className="container mx-auto px-4 max-w-4xl">
 
         {/* Title */}
@@ -36,13 +36,13 @@ const SupportFAQ = () => {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-10 bg-muted/40 border border-border rounded-xl px-5 py-4 flex items-center gap-4"
+          className="mb-3 bg-muted/40 border border-border rounded-xl px-5 py-4 flex items-center gap-4"
         >
-          <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center">
-            <Headphones className="h-4 w-4 text-primary" />
+          <div className="w-9 h-9 rounded-lg flex items-center justify-center">
+            <Headphones className="h-10 w-10 text-primary" />
           </div>
 
-          <p className="text-sm text-foreground font-medium leading-snug">
+          <p className="text-lg text-foreground font-bold leading-snug">
             {t('support.guarantee')}
           </p>
         </motion.div>
@@ -61,11 +61,11 @@ const SupportFAQ = () => {
                 value={`item-${i}`}
                 className="border border-border rounded-lg px-4 transition-all duration-200 hover:border-primary/40"
               >
-                <AccordionTrigger className="py-4 text-sm font-semibold text-foreground hover:no-underline">
+                <AccordionTrigger className="py-4 text-md font-semibold text-foreground hover:no-underline">
                   {faq.q}
                 </AccordionTrigger>
 
-                <AccordionContent className="pb-4 text-sm text-muted-foreground leading-relaxed">
+                <AccordionContent className="pb-4 text-md text-muted-foreground leading-relaxed">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>

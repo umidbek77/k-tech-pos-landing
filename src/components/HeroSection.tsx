@@ -6,26 +6,8 @@ import { ArrowRight, Play } from "lucide-react";
 const HeroSection = () => {
   const { t } = useLanguage();
 
-  // Parallax logic
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rotateX = useTransform(y, [-100, 100], [8, -8]);
-  const rotateY = useTransform(x, [-100, 100], [-8, 8]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section id="hero" className="relative flex items-center overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
@@ -33,8 +15,8 @@ const HeroSection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 lg:py-32">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
+      <div className="container mx-auto px-4 lg:py-20">
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* LEFT SIDE - IMAGE WITH PARALLAX */}
           <motion.div
             initial={{ opacity: 0, y: 80, scale: 0.95 }}
@@ -46,9 +28,9 @@ const HeroSection = () => {
             className="relative"
           >
             <motion.img
-              src="/public/img-1.png"
+              src="/public/img-4.png"
               alt="K-TECH POS system"
-              className="w-full max-w-2xl lg:max-w-3xl mx-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.25)] rounded-2xl"
+              className="w-full max-w-xl lg:max-w-xl mx-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.25)] rounded-2xl"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
@@ -64,11 +46,11 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-foreground">
+            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6 text-foreground">
               {t("hero.title")}
             </h1>
 
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-xl leading-relaxed">
+            <p className="text-md md:text-md text-muted-foreground mb-6 max-w-xl leading-relaxed">
               {t("hero.subtitle")}
             </p>
 

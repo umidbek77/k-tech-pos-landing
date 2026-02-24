@@ -18,13 +18,13 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-24 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section className="py-12 bg-muted/30">
+      <div className="container mx-auto px-2">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-20 text-foreground"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground"
         >
           {t("workflow.title")}
         </motion.h2>
@@ -35,26 +35,30 @@ const HowItWorks = () => {
 
           <div className="grid md:grid-cols-4 gap-12 relative">
             {steps.map((step, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.15 }}
-                className="flex flex-col items-center text-center group"
-              >
+                <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                        duration: 0.6,
+                        delay: i * 0.2,
+                        ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="flex flex-col items-center text-center group"
+                >
                 {/* Step Number */}
-                <div className="absolute -top-6 text-lg font-bold text-muted-foreground">
+                <div className="absolute -top-7 text-lg font-bold text-muted-foreground">
                   {i + 1}
                 </div>
 
                 {/* Icon container */}
                 <div className="relative z-10 w-16 h-16 rounded-2xl bg-background border border-border shadow-md flex items-center justify-center group-hover:shadow-xl transition-all duration-300">
-                  <step.icon className="h-7 w-7 text-primary" />
+                  <step.icon className="h-10 w-10 text-primary" />
                 </div>
 
                 {/* Label */}
-                <p className="mt-6 text-sm font-semibold text-foreground leading-snug max-w-[180px]">
+                <p className="mt-4 text-lg font-semibold text-foreground leading-snug max-w-[180px]">
                   {step.label}
                 </p>
               </motion.div>

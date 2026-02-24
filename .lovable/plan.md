@@ -18,7 +18,7 @@ A modern, high-conversion landing page for K-TECH POS system targeting Uzbekista
 
 ### 1. Sticky Header with Glassmorphism
 - "K-TECH" logo with POS terminal icon
-- Navigation: Features, Solutions, Hardware, Pricing, FAQ (smooth scroll)
+- Navigation: WhyUs, Solutions, Hardware, Pricing, FAQ (smooth scroll)
 - 3-language switcher (UZ 🇺🇿, RU 🇷🇺, EN 🇬🇧) — all text content translatable
 - Dark/Light theme toggle
 - "Start Free Demo" CTA button
@@ -38,7 +38,7 @@ A modern, high-conversion landing page for K-TECH POS system targeting Uzbekista
 - Horizontal stepper with icons: Scan → Auto-Check → Inventory Update → Real-time Report
 - Animated step progression on scroll
 
-### 5. AI-Powered Features Grid (2×2)
+### 5. AI-Powered WhyUs Grid (2×2)
 - AI Forecast (stock prediction)
 - Offline Mode (auto-sync)
 - Telegram Bot (24/7 analytics)

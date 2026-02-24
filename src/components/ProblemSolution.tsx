@@ -6,35 +6,35 @@ const ProblemSolution = () => {
 
   const cards = [
     {
-      image: "/public/img-6.png",
+      image: "img-15.jpg",
       q: t("problem.q1"),
       a: t("problem.a1"),
     },
     {
-      image: "/public/img-6.png",
+      image: "img-16.jpg",
       q: t("problem.q2"),
       a: t("problem.a2"),
     },
     {
-      image: "/public/img-6.png",
+      image: "img-17.jpg",
       q: t("problem.q3"),
       a: t("problem.a3"),
     },
   ];
 
   return (
-    <section className="py-24 bg-background">
+    <section id="solution" className="py-4 bg-background">
       <div className="container mx-auto px-4">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-16 text-foreground"
+          className="text-3xl md:text-4xl font-bold text-center mb-6 text-foreground"
         >
           {t("problem.title")}
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {cards.map((card, i) => (
             <motion.div
               key={i}
@@ -45,7 +45,7 @@ const ProblemSolution = () => {
               className="bg-card border border-border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 group"
             >
               {/* Image */}
-              <div className="h-44 overflow-hidden">
+              <div className="h-46 overflow-hidden">
                 <img
                   src={card.image}
                   alt="problem illustration"
@@ -54,8 +54,8 @@ const ProblemSolution = () => {
               </div>
 
               {/* Content */}
-              <div className="p-8 text-center space-y-3">
-                <p className="text-base font-medium text-muted-foreground leading-relaxed">
+              <div className="p-2 text-center">
+                <p className="text-md font-medium text-muted-foreground leading-relaxed">
                   {card.q}
                 </p>
 

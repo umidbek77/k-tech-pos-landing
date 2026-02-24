@@ -16,9 +16,9 @@ const HardwareBundle = () => {
   return (
     <section
       id="hardware"
-      className="py-28 bg-background relative overflow-hidden"
+      className="py-14 bg-background relative overflow-hidden"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-2">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ const HardwareBundle = () => {
           {t("hardware.title")}
         </motion.h2>
 
-        <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-muted-foreground mb-6 max-w-2xl mx-auto">
           {t("hardware.desc")}
         </p>
 
@@ -66,7 +66,7 @@ const HardwareBundle = () => {
         <div className="flex justify-center">
           <Badge
             variant="outline"
-            className="px-6 py-3 text-sm rounded-full border-primary/30 bg-primary/10 text-primary shadow-md"
+            className="px-2 py-3 text-sm rounded-full border-primary/30 bg-primary/10 text-primary shadow-md"
           >
             <ShieldCheck className="h-4 w-4 mr-2" />
             {t("hardware.warranty")}
