@@ -1,231 +1,197 @@
-import {useState} from "react";
-import {useLanguage} from "@/contexts/LanguageContext";
-import {motion} from "framer-motion";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
-import {Textarea} from "@/components/ui/textarea";
-import {useToast} from "@/hooks/use-toast";
-import {z} from "zod";
-import {Building2, MessageSquare, Phone, User, Users,} from "lucide-react";
+import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+import { MapPin, MessageSquare, Phone, User, AtSign } from "lucide-react";
 
 const DemoForm = () => {
-    const { t } = useLanguage();
-    const { toast } = useToast();
+  const { t, lang } = useLanguage();
+  const { toast } = useToast();
 
-    const [form, setForm] = useState({
-        name: "",
-        phone: "",
-        business: "",
-        employees: "",
-        branches: "",
-        plan: "",
-        note: "",
-    });
+  const [form, setForm] = useState({
+    fullName: "",
+    phoneNumber: "",
+    telegramNick: "",
+    address: "",
+    description: "",
+  });
 
-    const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(false);
 
-    const schema = z.object({
-        name: z.string().min(2),
-        phone: z.string().min(9),
-        business: z.string().min(1),
-        employees: z.string().min(1),
-        branches: z.string().min(1),
-        plan: z.string().min(1),
-        note: z.string().optional(),
-    });
+  const schema = z.object({
+    fullName: z.string().min(2, "Ism kamida 2 ta belgidan iborat bo‘lishi kerak"),
+    phoneNumber: z.string().min(9, "Telefon raqam noto‘g‘ri"),
+    telegramNick: z.string().optional(),
+    address: z.string().min(2, "Manzilni kiriting"),
+    description: z.string().optional(),
+  });
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  const mapLanguageToApiLang = () => {
+    switch (lang) {
+      case "uz":
+        return "UZ_LATN";
+      case "ru":
+        return "RU";
+      default:
+        return "UZ_LATN";
+    }
+  };
 
-        const result = schema.safeParse(form);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-        if (!result.success) {
-            const fieldErrors: Record<string, string> = {};
-            result.error.issues.forEach((issue) => {
-                fieldErrors[issue.path[0] as string] = issue.message;
-            });
-            setErrors(fieldErrors);
-            return;
+    const result = schema.safeParse(form);
+
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.issues.forEach((issue) => {
+        fieldErrors[issue.path[0] as string] = issue.message;
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setErrors({});
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "https://api.pos.k-tech.uz/api/v1/contract-applications",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            lang: mapLanguageToApiLang(),
+          },
+          body: JSON.stringify({
+            fullName: form.fullName,
+            phoneNumber: form.phoneNumber,
+            telegramNick: form.telegramNick || "",
+            address: form.address,
+            description: form.description || "",
+          }),
         }
+      );
 
-        setErrors({});
+      if (!response.ok) {
+        throw new Error("API error");
+      }
 
-        try {
-            const message = `
-📥 NEW DEMO REQUEST
+      toast({
+        title: "✅",
+        description: t("demo.success") || "So‘rovingiz muvaffaqiyatli yuborildi",
+      });
 
-👤 Name: ${form.name}
-📞 Phone: ${form.phone}
-🏢 Business: ${form.business}
-👥 Employees: ${form.employees}
-🏬 Branches: ${form.branches}
-📦 Plan: ${form.plan}
-📝 Note: ${form.note || "-"}
-            `;
+      setForm({
+        fullName: "",
+        phoneNumber: "",
+        telegramNick: "",
+        address: "",
+        description: "",
+      });
+    } catch (error) {
+      toast({
+        title: "❌",
+        description: "Xatolik yuz berdi. Qayta urinib ko‘ring.",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-            await fetch(
-                `https://api.telegram.org/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN}/sendMessage`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        chat_id: import.meta.env.VITE_TELEGRAM_CHAT_ID,
-                        text: message,
-                    }),
-                }
-            );
+  const handleChange = (key: string, value: string) => {
+    setForm((prev) => ({ ...prev, [key]: value }));
+  };
 
-            toast({ title: "✅", description: t("demo.success") });
+  return (
+    <section id="demo" className="py-20 bg-muted/40">
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto bg-card rounded-2xl border border-border p-8 shadow-xl"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground">
+            {t("demo.title")}
+          </h2>
 
-            setForm({
-                name: "",
-                phone: "",
-                business: "",
-                employees: "",
-                branches: "",
-                plan: "",
-                note: "",
-            });
-
-        } catch (error) {
-            toast({
-                title: "❌",
-                description: "Xatolik yuz berdi",
-            });
-        }
-    };
-
-    const handleChange = (key: string, value: string) => {
-        setForm((prev) => ({ ...prev, [key]: value }));
-    };
-
-    return (
-        <section id="demo" className="py-20 bg-muted/40">
-            <div className="container mx-auto px-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 25 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="max-w-4xl mx-auto bg-card rounded-2xl border border-border p-8 shadow-xl"
-                >
-                    <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground">
-                        {t("demo.title")}
-                    </h2>
-
-                    <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-2">
-                        {/* Name */}
-                        <div className="relative">
-                            <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                placeholder={t("demo.name")}
-                                value={form.name}
-                                onChange={(e) => handleChange("name", e.target.value)}
-                                className={`pl-10 h-11 ${errors.name ? "border-destructive" : ""}`}
-                            />
-                        </div>
-
-                        {/* Phone */}
-                        <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                placeholder={t("demo.phone")}
-                                value={form.phone}
-                                onChange={(e) => handleChange("phone", e.target.value)}
-                                className={`pl-10 h-11 ${errors.phone ? "border-destructive" : ""}`}
-                            />
-                        </div>
-
-                        {/* Business */}
-                        <div>
-                            <Select
-                                value={form.business}
-                                onValueChange={(v) => handleChange("business", v)}
-                            >
-                                <SelectTrigger
-                                    className={`h-11 ${errors.business ? "border-destructive" : ""}`}
-                                >
-                                    <SelectValue placeholder={t("demo.business")} />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="shop">{t("demo.shop")}</SelectItem>
-                                    <SelectItem value="supermarket">
-                                        {t("demo.supermarket")}
-                                    </SelectItem>
-                                    <SelectItem value="pharmacy">{t("demo.pharmacy")}</SelectItem>
-                                    <SelectItem value="other">{t("demo.other")}</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        {/* Employees */}
-                        <div className="relative">
-                            <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                placeholder={t("demo.employees")}
-                                value={form.employees}
-                                onChange={(e) => handleChange("employees", e.target.value)}
-                                className={`pl-10 h-11 ${errors.employees ? "border-destructive" : ""}`}
-                            />
-                        </div>
-
-                        {/* Branches */}
-                        <div className="relative">
-                            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                            <Input
-                                placeholder={t("demo.branches")}
-                                value={form.branches}
-                                onChange={(e) => handleChange("branches", e.target.value)}
-                                className={`pl-10 h-11 ${errors.branches ? "border-destructive" : ""}`}
-                            />
-                        </div>
-
-                        {/* Plan */}
-                        <div>
-                            <Select
-                                value={form.plan}
-                                onValueChange={(v) => handleChange("plan", v)}
-                            >
-                                <SelectTrigger
-                                    className={`h-11 ${errors.plan ? "border-destructive" : ""}`}
-                                >
-                                    <SelectValue placeholder={t("demo.plan")} />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="start">{t("pricing.start")}</SelectItem>
-                                    <SelectItem value="business">{t("pricing.business")}</SelectItem>
-                                    <SelectItem value="enterprise">{t("pricing.enterprise")}</SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </div>
-
-                        {/* Note */}
-                        <div className="md:col-span-2 relative">
-                            <MessageSquare className="absolute left-3 top-4 h-4 w-4 text-muted-foreground" />
-                            <Textarea
-                                placeholder={t("demo.note")}
-                                value={form.note}
-                                onChange={(e) => handleChange("note", e.target.value)}
-                                className="pl-10"
-                            />
-                        </div>
-
-                        {/* Submit */}
-                        <div className="md:col-span-2">
-                            <Button
-                                type="submit"
-                                className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-base font-semibold"
-                            >
-                                {t("demo.submit")}
-                            </Button>
-                        </div>
-                    </form>
-                </motion.div>
+          <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-2">
+            {/* Full Name */}
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder={t("demo.name") || "Ismingiz"}
+                value={form.fullName}
+                onChange={(e) => handleChange("fullName", e.target.value)}
+                className={`pl-10 h-11 ${errors.fullName ? "border-destructive" : ""}`}
+              />
             </div>
-        </section>
-    );
+
+            {/* Phone */}
+            <div className="relative">
+              <Phone className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder={t("demo.phone") || "Telefon raqamingiz"}
+                value={form.phoneNumber}
+                onChange={(e) => handleChange("phoneNumber", e.target.value)}
+                className={`pl-10 h-11 ${errors.phoneNumber ? "border-destructive" : ""}`}
+              />
+            </div>
+
+            {/* Telegram Nick */}
+            <div className="relative">
+              <AtSign className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Telegram username (@username)"
+                value={form.telegramNick}
+                onChange={(e) => handleChange("telegramNick", e.target.value)}
+                className={`pl-10 h-11 ${errors.telegramNick ? "border-destructive" : ""}`}
+              />
+            </div>
+
+            {/* Address */}
+            <div className="relative">
+              <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Manzilingiz"
+                value={form.address}
+                onChange={(e) => handleChange("address", e.target.value)}
+                className={`pl-10 h-11 ${errors.address ? "border-destructive" : ""}`}
+              />
+            </div>
+
+            {/* Description */}
+            <div className="md:col-span-2 relative">
+              <MessageSquare className="absolute left-3 top-4 h-4 w-4 text-muted-foreground" />
+              <Textarea
+                placeholder={t("demo.note") || "Qo‘shimcha izoh..."}
+                value={form.description}
+                onChange={(e) => handleChange("description", e.target.value)}
+                className="pl-10"
+              />
+            </div>
+
+            {/* Submit */}
+            <div className="md:col-span-2">
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 text-base font-semibold"
+              >
+                {loading ? "Yuborilmoqda..." : t("demo.submit")}
+              </Button>
+            </div>
+          </form>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 export default DemoForm;
