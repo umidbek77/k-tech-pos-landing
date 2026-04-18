@@ -102,11 +102,11 @@ const ProblemSolution = () => {
                         sx={{
                           position: "absolute",
                           bottom: -25,
-                          left: i === 1 ? "50%" : i === 2 ? 0 : "auto",
-                          right: i === 0 ? 0 : "auto",
+                          left: i === 1 ? "50%" : i === 2 ? -1 : "auto",
+                          right: i === 0 ? -1 : "auto",
                           transform: i === 1 ? "translateX(-50%)" : "none",
 
-                          width: "75%",
+                          width: "68%",
                         }}
                     >
                       <Stack
@@ -116,7 +116,7 @@ const ProblemSolution = () => {
                             px: 2,
                             py: 1.2,
                             textAlign: "center",
-                            borderRadius: "18px",
+                            borderRadius: "20px",
 
                             clipPath:
                                 i === 0

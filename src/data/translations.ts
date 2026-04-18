@@ -3,7 +3,7 @@ export type TranslationKey =
   | 'nav.demo' | 'hero.title' | 'hero.subtitle' | 'hero.badge'
   | 'hero.cta1' | 'hero.cta2'
   | 'problem.title' | 'problem.q1' | 'problem.a1' | 'problem.q2' | 'problem.a2' | 'problem.q3' | 'problem.a3'
-  | 'workflow.title' | 'workflow.s1' | 'workflow.s2' | 'workflow.s3' | 'workflow.s4'
+  | 'workflow.title' | 'workflow.s1' | 'workflow.s2' | 'workflow.s3' | 'workflow.s4' | 'workflow.s5'
   | 'features.title' | 'features.ai' | 'features.aiDesc' | 'features.offline' | 'features.offlineDesc'
   | 'features.telegram' | 'features.telegramDesc' | 'features.multi' | 'features.multiDesc'
   | 'usecases.title' | 'usecases.super' | 'usecases.superDesc' | 'usecases.clothing' | 'usecases.clothingDesc'
@@ -75,10 +75,11 @@ export const translations: Translations = {
     'problem.q3': "O'g'rilik xavfi?",
     'problem.a3': "To'liq shaffoflik va nazorat.",
     'workflow.title': 'Qanday ishlaydi?',
-    'workflow.s1': 'Skanerlash',
-    'workflow.s2': 'Avtomatik tekshirish',
-    'workflow.s3': 'Inventar yangilanishi',
-    'workflow.s4': 'Real-time hisobot',
+    'workflow.s1': 'Mahsulotni scanerlang',
+    'workflow.s2': "Qo'shilgan mahsulotni soting",
+    'workflow.s3': 'Chop etilgan chekni oling',
+    'workflow.s4': "Qoldiq avtomatik yangilanadi",
+    "workflow.s5": "Hisobotlarni kuzating",
     'features.title': 'AI kuchi bilan',
     'features.ai': 'AI Prognoz',
     'features.aiDesc': "Mahsulot tugashini oldindan bashorat qiladi.",
@@ -211,10 +212,11 @@ export const translations: Translations = {
     'problem.q3': 'Риск краж?',
     'problem.a3': 'Полная прозрачность и контроль.',
     'workflow.title': 'Как это работает?',
-    'workflow.s1': 'Сканирование',
-    'workflow.s2': 'Автопроверка',
-    'workflow.s3': 'Обновление запасов',
-    'workflow.s4': 'Отчёт в реальном времени',
+    'workflow.s1': 'Сканируйте товар',
+    'workflow.s2': 'Продайте добавленный товар',
+    'workflow.s3': 'Получите напечатанный чек',
+    'workflow.s4': 'Остатки обновляются автоматически',
+    "workflow.s5": "Отслеживайте отчёты",
     'features.title': 'Сила искусственного интеллекта',
     'features.ai': 'AI Прогноз',
     'features.aiDesc': 'Предсказывает нехватку товаров заранее.',
@@ -347,10 +349,11 @@ export const translations: Translations = {
     'problem.q3': 'Theft risk?',
     'problem.a3': 'Full transparency and control.',
     'workflow.title': 'How It Works',
-    'workflow.s1': 'Scan Item',
-    'workflow.s2': 'Auto-Check',
-    'workflow.s3': 'Inventory Update',
-    'workflow.s4': 'Real-time Report',
+    'workflow.s1': 'Scan the product',
+    'workflow.s2': 'Sell the added product',
+    'workflow.s3': 'Get the printed receipt',
+    'workflow.s4': 'Stock updates automatically',
+    "workflow.s5": "Track reports",
     'features.title': 'Powered by AI',
     'features.ai': 'AI Forecast',
     'features.aiDesc': 'Predicts stockouts before they happen.',

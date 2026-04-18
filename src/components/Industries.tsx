@@ -29,7 +29,7 @@ export function Industries() {
     return (
         <section
             id="industries"
-            className="py-18 bg-gradient-to-b from-background via-muted/20 to-background dark:via-muted/10"
+            className="py-18 bg-gradient-to-b from-background via-muted/20 to-background dark:via-muted/10 mb-8"
         >
             <div className="container mx-auto px-2">
                 <div className="text-center mb-6">

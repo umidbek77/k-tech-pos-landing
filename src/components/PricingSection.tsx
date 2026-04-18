@@ -59,7 +59,7 @@ const PricingSection = () => {
   return (
     <section
       id="pricing"
-      className="py-20 bg-muted/30 relative overflow-hidden"
+      className="py-1 bg-muted/30 relative overflow-hidden"
     >
       <div className="container mx-auto px-4">
         <motion.div

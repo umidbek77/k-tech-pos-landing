@@ -5,7 +5,7 @@ import HowItWorks from '@/components/HowItWorks';
 import HardwareBundle from '@/components/HardwareBundle';
 import PricingSection from '@/components/PricingSection';
 import SupportFAQ from '@/components/SupportFAQ';
-import DemoForm from '@/components/DemoForm';
+// import DemoForm from '@/components/DemoForm';
 import Footer from '@/components/Footer';
 import {Industries} from "@/components/Industries.tsx";
 
@@ -20,7 +20,7 @@ const Index = () => {
       <HardwareBundle />
       <PricingSection />
       <SupportFAQ />
-      <DemoForm />
+      {/*<DemoForm />*/}
       <Footer />
     </div>
   );

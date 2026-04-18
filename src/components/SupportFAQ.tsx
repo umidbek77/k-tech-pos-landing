@@ -1,12 +1,7 @@
-import { useLanguage } from '@/contexts/LanguageContext';
-import { motion } from 'framer-motion';
-import { Headphones } from 'lucide-react';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
+import {useLanguage} from '@/contexts/LanguageContext';
+import {motion} from 'framer-motion';
+import {Headphones} from 'lucide-react';
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from '@/components/ui/accordion';
 
 const SupportFAQ = () => {
   const { t } = useLanguage();
@@ -18,64 +13,69 @@ const SupportFAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-19 bg-background">
-      <div className="container mx-auto px-4 max-w-4xl">
+      <section id="faq" className="py-24 bg-background">
+        <div className="container mx-auto px-4 max-w-6xl">
 
-        {/* Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-bold text-center mb-8 text-foreground"
-        >
-          {t('support.title')}
-        </motion.h2>
+          {/* TITLE */}
+          <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-3xl md:text-4xl font-semibold text-center mb-3 text-foreground"
+          >
+            {t('support.title')}
+          </motion.h2>
 
-        {/* Compact Guarantee */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-3 bg-muted/40 border border-border rounded-xl px-5 py-4 flex items-center gap-4"
-        >
-          <div className="w-9 h-9 rounded-lg flex items-center justify-center">
-            <Headphones className="h-10 w-10 text-primary" />
-          </div>
-
-          <p className="text-lg text-foreground font-bold leading-snug">
+          {/* SUBTEXT */}
+          <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
             {t('support.guarantee')}
           </p>
-        </motion.div>
 
-        {/* FAQ */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <Accordion type="single" collapsible className="space-y-3">
+          {/* GUARANTEE */}
+          <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-6 bg-muted/40 border border-border rounded-2xl px-6 py-5 flex items-center gap-4 shadow-sm"
+          >
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-primary/10">
+              <Headphones className="h-5 w-5 text-primary" />
+            </div>
 
-            {faqs.map((faq, i) => (
-              <AccordionItem
-                key={i}
-                value={`item-${i}`}
-                className="border border-border rounded-lg px-4 transition-all duration-200 hover:border-primary/40"
-              >
-                <AccordionTrigger className="py-4 text-md font-semibold text-foreground hover:no-underline">
-                  {faq.q}
-                </AccordionTrigger>
+            <p className="text-lg text-foreground font-semibold leading-snug">
+              {t('support.guarantee')}
+            </p>
+          </motion.div>
 
-                <AccordionContent className="pb-4 text-md text-muted-foreground leading-relaxed">
-                  {faq.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
+          {/* FAQ */}
+          <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+          >
+            <Accordion type="single" collapsible className="space-y-4">
 
-          </Accordion>
-        </motion.div>
+              {faqs.map((faq, i) => (
+                  <AccordionItem
+                      key={i}
+                      value={`item-${i}`}
+                      className="border border-border rounded-xl px-6 bg-white/50 backdrop-blur-sm shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/40"
+                  >
+                    <AccordionTrigger className="py-5 text-lg font-medium text-foreground hover:no-underline">
+                      {faq.q}
+                    </AccordionTrigger>
 
-      </div>
-    </section>
+                    <AccordionContent className="pb-5 text-base text-muted-foreground leading-relaxed">
+                      {faq.a}
+                    </AccordionContent>
+                  </AccordionItem>
+              ))}
+
+            </Accordion>
+          </motion.div>
+
+        </div>
+      </section>
   );
 };
 
