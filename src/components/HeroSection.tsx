@@ -1,87 +1,144 @@
-import { useLanguage } from "@/contexts/LanguageContext";
-import { Button } from "@/components/ui/button";
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import {useLanguage} from "@/contexts/LanguageContext";
+import {Button} from "@/components/ui/button";
+import {ArrowRight, Play} from "lucide-react";
+import {Box, Typography} from "@mui/material";
+
+const images = ["/img-1.png", "/img-2.png", "/img-3.png"];
 
 const HeroSection = () => {
-  const { t } = useLanguage();
+    const { t } = useLanguage();
 
-  return (
-    <section id="hero" className="relative flex items-center overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-4 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* LEFT SIDE - IMAGE WITH PARALLAX */}
-          <motion.div
-            initial={{ opacity: 0, y: 80, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{
-              duration: 1.2,
-              ease: [0.16, 1, 0.3, 1],
+    return (
+        <Box
+            id="hero"
+            sx={{
+                pt: { xs: 12, md: 16 },
+                pb: { xs: 2, md: 4 },
             }}
-            className="relative"
-          >
-            <motion.img
-              src="/public/img-4.png"
-              alt="K-TECH POS system"
-              className="w-full max-w-xl lg:max-w-xl mx-auto drop-shadow-[0_40px_80px_rgba(0,0,0,0.25)] rounded-2xl"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7 }}
-            />
+        >
+            <Box
+                sx={{
+                    maxWidth: "1400px",
+                    mx: "auto",
+                    px: 2,
+                }}
+            >
+                <Box sx={{ textAlign: "center", maxWidth: 1200, mx: "auto" }}>
+                    <Typography
+                        sx={{
+                            fontSize: { xs: 30, md: 52, lg: 64 },
+                            fontWeight: 700,
+                            lineHeight: 1.15,
+                        }}
+                    >
+                        <Box
+                            component="span"
+                            sx={{
+                                bgcolor: "#DCFCE7",
+                                color: "#16A34A",
+                                px: 1.5,
+                                py: 0.5,
+                                borderRadius: "8px",
+                                mr: 1,
+                            }}
+                        >
+                            K-TECH POS
+                        </Box>
+                        Savdoni nazorat qilishdan rohatlaning!
+                    </Typography>
 
-            {/* Floating glow */}
-            <div className="absolute -z-10 inset-0 bg-primary/20 blur-3xl rounded-full scale-75" />
-          </motion.div>
+                    <Typography
+                        sx={{
+                            mt: 3,
+                            color: "text.secondary",
+                            fontSize: { xs: 15, md: 18 },
+                            maxWidth: 650,
+                            mx: "auto",
+                        }}
+                    >
+                        Gipermarketdan kichik do'kongacha barcha hisob-kitoblar bir joyda. AI
+                        imkoniyatlari bilan biznesingizni yangi bosqichga olib chiqing.
+                    </Typography>
 
-          {/* RIGHT SIDE - TEXT */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
-            <h1 className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight mb-6 text-foreground">
-              {t("hero.title")}
-            </h1>
+                    <Box
+                        sx={{
+                            mt: 4,
+                            pl:3,
+                            pr:3,
+                            position: "relative",
+                            zIndex: 2,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                gap: 2,
+                                flexDirection: { xs: "column", sm: "row" },
+                            }}
+                        >
+                            <Button className="h-12 px-8 shadow-md text-md">
+                                {t("hero.cta1")}
+                                <ArrowRight className="ml-2 h-4 w-4" />
+                            </Button>
 
-            <p className="text-md md:text-md text-muted-foreground mb-6 max-w-xl leading-relaxed">
-              {t("hero.subtitle")}
-            </p>
+                            <Button variant="outline" className="h-12 px-8 text-md">
+                                <Play className="mr-2 h-4 w-4" />
+                                {t("hero.cta2")}
+                            </Button>
+                        </Box>
+                    </Box>
+                </Box>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground text-base px-8 h-12 shadow-lg"
-                onClick={() =>
-                  document
-                    .querySelector("#demo")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
-              >
-                {t("hero.cta1")}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-base px-8 h-12 border-border hover:bg-muted"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                {t("hero.cta2")}
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
+                <Box
+                    sx={{
+                        mt: -8,
+                        display: "grid",
+                        gap: 3,
+                        gridTemplateColumns: {
+                            xs: "1.2fr",
+                            md: "1fr 2.3fr 1fr",
+                        },
+                        alignItems: "stretch",
+                    }}
+                >
+                    {images.map((src, index) => (
+                        <Box
+                            key={index}
+                            sx={{
+                                overflow: "hidden",
+                                borderRadius: "20px",
+                                height:
+                                    index === 1
+                                        ? { xs: 280, md: 320 }
+                                        : { xs: 340, md: 400 },
+                                transform: index === 1 ? "translateY(80px)" : "none",
+                                boxShadow:
+                                    index === 1
+                                        ? "0 10px 30px rgba(0,0,0,0.1)"
+                                        : "0 20px 40px rgba(0,0,0,0.15)",
+                            }}
+                        >
+                            <Box
+                                component="img"
+                                src={src}
+                                alt="POS"
+                                sx={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    transition: "0.5s",
+                                    "&:hover": {
+                                        transform: "scale(1.05)",
+                                    },
+                                }}
+                            />
+                        </Box>
+                    ))}
+                </Box>
+            </Box>
+        </Box>
+    );
 };
 
 export default HeroSection;

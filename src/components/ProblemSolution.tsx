@@ -1,73 +1,158 @@
-import { useLanguage } from "@/contexts/LanguageContext";
-import { motion } from "framer-motion";
+import {useLanguage} from "@/contexts/LanguageContext";
+import {motion} from "framer-motion";
+import {Box, Stack, Typography} from "@mui/material";
 
 const ProblemSolution = () => {
   const { t } = useLanguage();
 
   const cards = [
     {
-      image: "img-15.jpg",
+      image: "/img-15.jpg",
       q: t("problem.q1"),
       a: t("problem.a1"),
     },
     {
-      image: "img-16.jpg",
+      image: "/img-16.jpg",
       q: t("problem.q2"),
       a: t("problem.a2"),
     },
     {
-      image: "img-17.jpg",
+      image: "/img-17.jpg",
       q: t("problem.q3"),
       a: t("problem.a3"),
     },
   ];
 
   return (
-    <section id="solution" className="py-4 bg-background">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-6 text-foreground"
-        >
-          {t("problem.title")}
-        </motion.h2>
+      <Box
+          id="solution"
+          sx={{
+            position: "relative",
+            py: { xs: 6, md: 10 },
+            overflow: "hidden",
+            backgroundColor: "#F6F8F7",
+          }}
+      >
+        <Box sx={{ position: "absolute", inset: 0, zIndex: -1 }}>
+          <Box sx={{ position: "absolute", inset: 0, bgcolor: "#F6F8F7" }} />
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {cards.map((card, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="bg-card border border-border rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 group"
-            >
-              {/* Image */}
-              <div className="h-46 overflow-hidden">
-                <img
-                  src={card.image}
-                  alt="problem illustration"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
+          <Box
+              sx={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                width: "100%",
+                height: "65%",
+                bgcolor: "#EEF2F1",
+                clipPath: "polygon(0 35%, 100% 0, 100% 100%, 0 100%)",
+              }}
+          />
+        </Box>
 
-              {/* Content */}
-              <div className="p-2 text-center">
-                <p className="text-md font-medium text-muted-foreground leading-relaxed">
-                  {card.q}
-                </p>
+        <Box sx={{ maxWidth: 1300, mx: "auto", px: 2 }}>
+          <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: { xs: 28, md: 44 },
+                fontWeight: 600,
+                mb: 8,
+              }}
+          >
+            {t("problem.title")}
+          </Typography>
 
-                <p className="text-lg font-semibold text-primary leading-relaxed">
-                  {card.a}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+          <Box
+              sx={{
+                display: "grid",
+                gap: 5,
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  md: "repeat(3, 1fr)",
+                },
+              }}
+          >
+            {cards.map((card, i) => (
+                <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.15 }}
+                >
+                  <Box sx={{ position: "relative" }}>
+                    <Box
+                        sx={{
+                          height: 340,
+                          borderRadius: "20px",
+                          overflow: "hidden",
+                        }}
+                    >
+                      <Box
+                          component="img"
+                          src={card.image}
+                          alt="problem"
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                      />
+                    </Box>
+
+                    <Box
+                        sx={{
+                          position: "absolute",
+                          bottom: -25,
+                          left: i === 1 ? "50%" : i === 2 ? 0 : "auto",
+                          right: i === 0 ? 0 : "auto",
+                          transform: i === 1 ? "translateX(-50%)" : "none",
+
+                          width: "75%",
+                        }}
+                    >
+                      <Stack
+                          spacing={0.5}
+                          sx={{
+                            backgroundColor: "#F6F8F7",
+                            px: 2,
+                            py: 1.2,
+                            textAlign: "center",
+                            borderRadius: "18px",
+
+                            clipPath:
+                                i === 0
+                                    ? "polygon(0 0, 100% 0, 100% 100%, 15% 100%, 0 70%)"
+                                    : i === 1
+                                        ? "polygon(0 0, 100% 0, 100% 65%, 85% 100%, 15% 100%, 0 65%)"
+                                        : "polygon(0 0, 100% 0, 100% 70%, 100% 100%, 0 100%, 0 65%)",
+
+                          }}
+                      >
+                        <Typography
+                            sx={{
+                              fontSize: 17,
+                              color: "text.secondary",
+                            }}
+                        >
+                          {card.q}
+                        </Typography>
+
+                        <Typography
+                            sx={{
+                              fontSize: 18,
+                              fontWeight: 600,
+                              color: "#16A34A",
+                            }}
+                        >
+                          {card.a}
+                        </Typography>
+                      </Stack>
+                    </Box>
+                  </Box>
+                </motion.div>
+            ))}
+          </Box>
+        </Box>
+      </Box>
   );
 };
 
