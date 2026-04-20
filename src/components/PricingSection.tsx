@@ -1,11 +1,15 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import { Check, Star, Zap, Crown } from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 const PricingSection = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
+  const theme = useTheme();
+
+  const isDark = theme.palette.mode === "dark";
 
   const plans = [
     {
@@ -14,11 +18,11 @@ const PricingSection = () => {
       price: "120 000 so’m",
       desc: t("pricing.startDesc"),
       features: [
-        t("pricing.feature1"),
-        t("pricing.feature2"),
-        "1 kassa terminali",
-        "Asosiy hisobotlar",
-        "Email qo‘llab-quvvatlash",
+        t("pricing.start.f1"),
+        t("pricing.start.f2"),
+        t("pricing.start.f3"),
+        t("pricing.start.f4"),
+        t("pricing.start.f5"),
       ],
       popular: false,
     },
@@ -28,13 +32,13 @@ const PricingSection = () => {
       price: "200 000 so’m",
       desc: t("pricing.businessDesc"),
       features: [
-        t("pricing.feature3"),
-        t("pricing.feature4"),
-        t("pricing.feature2"),
-        "Cheksiz mahsulot",
-        "AI tavsiyalar",
-        "Telegram bot integratsiya",
-        "Real-time monitoring",
+        t("pricing.business.f1"),
+        t("pricing.business.f2"),
+        t("pricing.business.f3"),
+        t("pricing.business.f4"),
+        t("pricing.business.f5"),
+        t("pricing.business.f6"),
+        t("pricing.business.f7"),
       ],
       popular: true,
     },
@@ -44,103 +48,182 @@ const PricingSection = () => {
       price: "300 000 so’m",
       desc: t("pricing.enterpriseDesc"),
       features: [
-        t("pricing.feature5"),
-        t("pricing.feature4"),
-        t("pricing.feature6"),
-        "Multi-branch boshqaruv",
-        "Maxsus integratsiyalar",
-        "Shaxsiy menejer",
-        "24/7 premium support",
+        t("pricing.enterprise.f1"),
+        t("pricing.enterprise.f2"),
+        t("pricing.enterprise.f3"),
+        t("pricing.enterprise.f4"),
+        t("pricing.enterprise.f5"),
+        t("pricing.enterprise.f6"),
+        t("pricing.enterprise.f7"),
       ],
       popular: false,
     },
   ];
 
   return (
-    <section
-      id="pricing"
-      className="py-1 bg-muted/30 relative overflow-hidden"
-    >
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-10"
-        >
-          {/*<Badge*/}
-          {/*  variant="secondary"*/}
-          {/*  className="mb-4 bg-accent text-accent-foreground border-0 px-4 py-1"*/}
-          {/*>*/}
-          {/*  {t("social.badge")}*/}
-          {/*</Badge>*/}
-
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            {t("pricing.title")}
-          </h2>
-
-          <p className="text-muted-foreground">{t("pricing.note")}</p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              whileHover={{ y: -8 }}
-              className="relative bg-card rounded-2xl border border-border shadow-lg p-8 flex flex-col transition-all duration-300 hover:shadow-2xl"
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <Badge className="flex items-center gap-1 bg-primary text-primary-foreground border-0 px-4 py-1">
-                    <Star className="h-3 w-3" />
-                    Eng mashhur
-                  </Badge>
-                </div>
-              )}
-
-              <plan.icon className="h-10 w-10 mb-6 text-primary" />
-
-              <h3 className="text-xl font-bold text-foreground mb-2">
-                {plan.name}
-              </h3>
-
-              <p className="text-sm text-muted-foreground mb-6">{plan.desc}</p>
-
-              <p className="text-3xl font-bold text-foreground mb-8">
-                {plan.price}
-              </p>
-
-              <ul className="space-y-3 mb-8 flex-1">
-                {plan.features.map((f, fi) => (
-                  <li
-                    key={fi}
-                    className="flex items-start gap-3 text-sm text-muted-foreground"
-                  >
-                    <Check className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                onClick={() =>
-                  document
-                    .querySelector("#demo")
-                    ?.scrollIntoView({ behavior: "smooth" })
-                }
+      <Box
+          id="pricing"
+          sx={{
+            py: 6,
+            background: isDark ? "#0B1220" : "rgba(0,0,0,0.03)",
+          }}
+      >
+        <Box sx={{ maxWidth: 1400, mx: "auto", px: 2 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}>
+            <Box sx={{ textAlign: "center", mb: 6 }}>
+              <Typography
+                  sx={{
+                    fontSize: { xs: 28, md: 36 },
+                    fontWeight: 700,
+                    mb: 0.5,
+                  }}
               >
-                {t("nav.demo")}
-              </Button>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+                {t("pricing.title")}
+              </Typography>
+
+              <Typography
+                  sx={{
+                    fontSize: 18,
+                  }}
+              >
+                {t("pricing.note")}
+              </Typography>
+            </Box>
+          </motion.div>
+
+          <Box
+              sx={{
+                display: "grid",
+                gridTemplateColumns: {
+                  xs: "1fr",
+                  md: "repeat(3,1fr)",
+                },
+                gap: 4,
+              }}
+          >
+            {plans.map((plan, i) => (
+                <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.15 }}
+                    whileHover={{ y: -8 }}
+                >
+                  <Box
+                      sx={{
+                        position: "relative",
+                        borderRadius: "16px",
+                        border: "2px solid #22C55E",
+                        p: 4,
+                        display: "flex",
+                        flexDirection: "column",
+                        height: "100%",
+                        transition: "0.3s",
+                        boxShadow: isDark
+                            ? "0 10px 30px rgba(0,0,0,0.4)"
+                            : "0 8px 20px rgba(0,0,0,0.05)",
+                        "&:hover": {
+                          boxShadow: isDark
+                              ? "0 20px 50px rgba(0,0,0,0.6)"
+                              : "0 20px 40px rgba(0,0,0,0.1)",
+                        },
+                      }}
+                  >
+                    {plan.popular && (
+                        <Box
+                            sx={{
+                              position: "absolute",
+                              top: -16,
+                              left: "50%",
+                              transform: "translateX(-50%)",
+                              background: "#22C55E",
+                              color: "#fff",
+                              px: 2,
+                              py: 0.5,
+                              borderRadius: "999px",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: 0.5,
+                              fontSize: 14,
+                            }}
+                        >
+                          <Star size={18} />
+                          Eng mashhur
+                        </Box>
+                    )}
+
+                    <Box sx={{ mb: 2 }}>
+                      <plan.icon size={40} color="#22C55E" />
+                    </Box>
+
+                    <Typography
+                        sx={{
+                          fontSize: 28,
+                          fontWeight: 700,
+                        }}
+                    >
+                      {plan.name}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                          fontSize: 18,
+                          mb: 1,
+                        }}
+                    >
+                      {plan.desc}
+                    </Typography>
+
+                    <Typography
+                        sx={{
+                          fontSize: 28,
+                          fontWeight: 700,
+                          mb: 2,
+                        }}
+                    >
+                      {plan.price}
+                    </Typography>
+
+                    <Box sx={{ flex: 1, mb: 4 }}>
+                      {plan.features.map((f, fi) => (
+                          <Box
+                              key={fi}
+                              sx={{
+                                display: "flex",
+                                alignItems: "flex-start",
+                                gap: 1.5,
+                                mb: 1.5,
+                                fontSize: 18,
+                              }}
+                          >
+                            <Check size={18} color="#22C55E" />
+                            {f}
+                          </Box>
+                      ))}
+                    </Box>
+
+                    <Button
+                        fullWidth
+                        sx={{
+                          background: "#16A34A",
+                          color: "#fff",
+                          textTransform: "none",
+                          fontWeight: 600,
+                          fontSize: 16,
+                          "&:hover": {
+                            background: "#15803D",
+                          },
+                        }}
+                        onClick={() => navigate("/activate")}
+                    >
+                      {t("nav.demo")}
+                    </Button>
+                  </Box>
+                </motion.div>
+            ))}
+          </Box>
+        </Box>
+      </Box>
   );
 };
 

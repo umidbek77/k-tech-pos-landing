@@ -12,7 +12,7 @@ const HeroSection = () => {
         <Box
             id="hero"
             sx={{
-                pt: { xs: 12, md: 16 },
+                pt: { xs: 12, md: 18 },
                 pb: { xs: 2, md: 4 },
             }}
         >
@@ -34,30 +34,74 @@ const HeroSection = () => {
                         <Box
                             component="span"
                             sx={{
-                                bgcolor: "#DCFCE7",
+                                position: "relative",
+                                display: "inline-block",
                                 color: "#16A34A",
-                                px: 1.5,
-                                py: 0.5,
-                                borderRadius: "8px",
+                                px: "2px",
+                                py: "2px",
+                                border: "1.5px solid #16A34A",
+                                borderRadius: "2px",
                                 mr: 1,
+                                backgroundColor: "rgba(22,163,74,0.12)",
+
+                                "&::before": {
+                                    content: '""',
+                                    position: "absolute",
+                                    width: 6,
+                                    height: 6,
+                                    backgroundColor: "#16A34A",
+                                    borderRadius: "50%",
+                                    top: "-3px",
+                                    left: "-3px",
+                                },
+                                "&::after": {
+                                    content: '""',
+                                    position: "absolute",
+                                    width: 6,
+                                    height: 6,
+                                    backgroundColor: "#16A34A",
+                                    borderRadius: "50%",
+                                    top: "-3px",
+                                    right: "-3px",
+                                },
+
+                                "& .dot-bl": {
+                                    position: "absolute",
+                                    width: 6,
+                                    height: 6,
+                                    backgroundColor: "#16A34A",
+                                    borderRadius: "50%",
+                                    bottom: "-3px",
+                                    left: "-3px",
+                                },
+                                "& .dot-br": {
+                                    position: "absolute",
+                                    width: 6,
+                                    height: 6,
+                                    backgroundColor: "#16A34A",
+                                    borderRadius: "50%",
+                                    bottom: "-3px",
+                                    right: "-3px",
+                                },
                             }}
                         >
                             K-TECH POS
+                            <Box className="dot-bl" />
+                            <Box className="dot-br" />
                         </Box>
-                        Savdoni nazorat qilishdan rohatlaning!
+                        {t("hero.title")}
                     </Typography>
 
                     <Typography
                         sx={{
-                            mt: 3,
+                            mt: 2,
                             color: "text.secondary",
                             fontSize: { xs: 15, md: 18 },
                             maxWidth: 650,
                             mx: "auto",
                         }}
                     >
-                        Gipermarketdan kichik do'kongacha barcha hisob-kitoblar bir joyda. AI
-                        imkoniyatlari bilan biznesingizni yangi bosqichga olib chiqing.
+                        {t("hero.subtitle")}
                     </Typography>
 
                     <Box

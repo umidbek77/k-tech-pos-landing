@@ -46,16 +46,16 @@ const Header = () => {
                     : 'bg-[hsl(var(--glass))]'
             }`}
         >
-            <div className="container mx-auto flex items-center justify-between h-16 px-4">
+            <div className="container mx-auto flex items-center justify-between h-20 px-4">
 
                 {/* Logo */}
                 <a
                     href="#"
-                    className="flex items-center gap-2 font-bold text-xl tracking-tight group"
+                    className="flex items-center gap-2 font-bold text-4xl tracking-tight group"
                 >
-                    <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-white font-semibold transition-transform group-hover:scale-105">
-                        KP
-                    </div>
+                    {/*<div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center text-white font-semibold transition-transform group-hover:scale-105">*/}
+                    {/*    KP*/}
+                    {/*</div>*/}
                     <span className="text-foreground">
             K-TECH <span className="text-primary">POS</span>
           </span>
@@ -67,7 +67,7 @@ const Header = () => {
                         <button
                             key={item.href}
                             onClick={() => scrollTo(item.href)}
-                            className="relative text-md font-medium text-muted-foreground hover:text-foreground transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
+                            className="relative text-lg font-medium text-muted-foreground hover:text-foreground transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
                         >
                             {item.label}
                         </button>
@@ -75,7 +75,7 @@ const Header = () => {
                 </nav>
 
                 {/* Right controls */}
-                <div className="hidden lg:flex items-center gap-3">
+                <div className="hidden lg:flex items-center gap-4">
 
                     {/* Lang switcher (segmented style refined) */}
                     <div className="pt-1">
@@ -86,9 +86,9 @@ const Header = () => {
                                 <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="uz">Uzbek</SelectItem>
-                                <SelectItem value="ru">Русский</SelectItem>
-                                <SelectItem value="en">English</SelectItem>
+                                <SelectItem value="uz">UZ</SelectItem>
+                                <SelectItem value="ru">РУ</SelectItem>
+                                <SelectItem value="en">EN</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
@@ -107,9 +107,9 @@ const Header = () => {
                     {/* CTA */}
                     <Button
                         onClick={() => scrollTo('#demo')}
-                        className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all"
+                        className="bg-primary text-lg hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all"
                     >
-                        {t('nav.demo')}
+                        {t('nav.login')}
                     </Button>
                 </div>
 
@@ -151,9 +151,9 @@ const Header = () => {
                                         <SelectValue />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="uz">Uzbek</SelectItem>
-                                        <SelectItem value="ru">Русский</SelectItem>
-                                        <SelectItem value="en">English</SelectItem>
+                                        <SelectItem value="uz">UZ</SelectItem>
+                                        <SelectItem value="ru">РУ</SelectItem>
+                                        <SelectItem value="en">EN</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </div>

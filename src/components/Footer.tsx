@@ -1,6 +1,13 @@
-import {useLanguage} from "@/contexts/LanguageContext";
-import {Instagram, Mail, MapPin, Phone, Send, Youtube,} from "lucide-react";
-import {Button} from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import {
+    Instagram,
+    Mail,
+    MapPin,
+    Phone,
+    Send,
+    Youtube,
+} from "lucide-react";
+import { Box, Typography } from "@mui/material";
 
 const Footer = () => {
     const { t } = useLanguage();
@@ -10,121 +17,210 @@ const Footer = () => {
     };
 
     return (
-        <footer className="relative border-t border-border bg-background/80 backdrop-blur-xl pt-16 pb-8">
-            <div className="container mx-auto px-4">
+        <Box
+            component="footer"
+            sx={{
+                borderTop: "1px solid #D2D1D1FF",
+                backdropFilter: "blur(12px)",
+                pt: 8,
+                pb: 4,
+            }}
+        >
+            <Box sx={{ maxWidth: 1400, mx: "auto", px: 2 }}>
 
-                {/* Top Grid */}
-                <div className="grid md:grid-cols-4 gap-10 mb-12">
-
-                    {/* Brand */}
-                    <div className="space-y-5">
-                        <a
-                            href="#"
-                            className="flex items-center gap-2 font-bold text-xl tracking-tight group"
+                <Box
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: {
+                            xs: "1fr",
+                            md: "repeat(4,1fr)",
+                        },
+                        gap: 6,
+                        mb: 4,
+                    }}
+                >
+                    <Box>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 1.5,
+                                mb: 2,
+                                cursor: "pointer",
+                            }}
                         >
-                            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center text-white font-semibold transition-transform group-hover:scale-105">
-                                KP
-                            </div>
-                            <span className="text-foreground">
-                K-TECH <span className="text-primary">POS</span>
-              </span>
-                        </a>
+                            {/*<Box*/}
+                            {/*    sx={{*/}
+                            {/*        width: 36,*/}
+                            {/*        height: 36,*/}
+                            {/*        borderRadius: "10px",*/}
+                            {/*        background: "#45af74",*/}
+                            {/*        color: "#fff",*/}
+                            {/*        display: "flex",*/}
+                            {/*        alignItems: "center",*/}
+                            {/*        justifyContent: "center",*/}
+                            {/*        fontWeight: 700,*/}
+                            {/*        fontSize: 20,*/}
+                            {/*    }}*/}
+                            {/*>*/}
+                            {/*    KP*/}
+                            {/*</Box>*/}
 
-                        <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
+                            <Typography sx={{ fontWeight: 700, fontSize: 34 }}>
+                                K-TECH <Box component="span" sx={{ color: "#45af74" }}>POS</Box>
+                            </Typography>
+                        </Box>
+
+                        <Typography
+                            sx={{
+                                fontSize: 16,
+                                color: "#6B7280",
+                                lineHeight: 1.6,
+                                maxWidth: 260,
+                            }}
+                        >
                             {t("footer.slogan")}
-                        </p>
+                        </Typography>
+                    </Box>
 
-                        {/*<Button*/}
-                        {/*    onClick={() => scrollTo("#demo")}*/}
-                        {/*    className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all"*/}
-                        {/*>*/}
-                        {/*    {t("footer.demo")}*/}
-                        {/*</Button>*/}
-                    </div>
-
-                    {/* Product */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-4">
+                    <Box>
+                        <Typography
+                            sx={{
+                                fontSize: 18,
+                                fontWeight: 600,
+                                mb: 2,
+                            }}
+                        >
                             {t("footer.product")}
-                        </h4>
+                        </Typography>
 
-                        <ul className="space-y-3">
-                            {[
-                                { label: t("footer.features"), href: "#solution" },
-                                { label: t("footer.pricing"), href: "#pricing" },
-                                { label: t("footer.dashboard"), href: "#hardware" },
-                            ].map((item) => (
-                                <li key={item.href}>
-                                    <button
-                                        onClick={() => scrollTo(item.href)}
-                                        className="relative text-sm font-medium text-muted-foreground hover:text-foreground transition-colors after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full"
-                                    >
-                                        {item.label}
-                                    </button>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                        {[
+                            { label: t("footer.features"), href: "#solution" },
+                            { label: t("footer.pricing"), href: "#pricing" },
+                            { label: t("footer.dashboard"), href: "#hardware" },
+                        ].map((item) => (
+                            <Typography
+                                key={item.href}
+                                onClick={() => scrollTo(item.href)}
+                                sx={{
+                                    fontSize: 16,
+                                    color: "#6B7280",
+                                    mb: 1.5,
+                                    cursor: "pointer",
+                                    transition: "0.3s",
+                                    "&:hover": {
+                                        color: "#24c648",
+                                    },
+                                }}
+                            >
+                                {item.label}
+                            </Typography>
+                        ))}
+                    </Box>
 
-                    {/* Contact */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-4">
+                    <Box>
+                        <Typography
+                            sx={{
+                                fontSize: 18,
+                                fontWeight: 600,
+                                mb: 2,
+                            }}
+                        >
                             {t("footer.contact")}
-                        </h4>
+                        </Typography>
 
-                        <div className="space-y-3 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-3 hover:text-foreground transition">
-                                <Phone className="h-4 w-4 text-primary" />
-                                <span>+998 90 123 45 67</span>
-                            </div>
+                        {[
+                            { icon: Phone, text: "+998 90 123 45 67" },
+                            { icon: Mail, text: "info@k-tech.uz" },
+                            { icon: MapPin, text: "Urgench, Xorazm" },
+                        ].map((item, i) => (
+                            <Box
+                                key={i}
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 1.5,
+                                    mb: 1.5,
+                                    fontSize: 16,
+                                    color: "#6B7280",
+                                    transition: "0.3s",
+                                    "&:hover": {
+                                        color: "#24c648",
+                                    },
+                                }}
+                            >
+                                <item.icon size={16} color="#22C55E" />
+                                {item.text}
+                            </Box>
+                        ))}
+                    </Box>
 
-                            <div className="flex items-center gap-3 hover:text-foreground transition">
-                                <Mail className="h-4 w-4 text-primary" />
-                                <span>info@k-tech.uz</span>
-                            </div>
-
-                            <div className="flex items-center gap-3 hover:text-foreground transition">
-                                <MapPin className="h-4 w-4 text-primary" />
-                                <span>Urgench, Xorazm</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Social */}
-                    <div>
-                        <h4 className="text-sm font-semibold text-foreground mb-4">
+                    <Box>
+                        <Typography
+                            sx={{
+                                fontSize: 18,
+                                fontWeight: 600,
+                                mb: 2,
+                            }}
+                        >
                             {t("footer.social")}
-                        </h4>
+                        </Typography>
 
-                        <div className="flex gap-3">
+                        <Box sx={{ display: "flex", gap: 1.5 }}>
                             {[Send, Instagram, Youtube].map((Icon, i) => (
-                                <a
+                                <Box
                                     key={i}
-                                    href="#"
-                                    className="w-10 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
+                                    sx={{
+                                        width: 42,
+                                        height: 42,
+                                        borderRadius: "10px",
+                                        border: "1px solid #E5E7EB",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        cursor: "pointer",
+                                        transition: "0.3s",
+                                        "&:hover": {
+                                            background: "#22C55E",
+                                            color: "#fff",
+                                        },
+                                    }}
                                 >
-                                    <Icon className="h-4 w-4" />
-                                </a>
+                                    <Icon size={18} />
+                                </Box>
                             ))}
-                        </div>
-                    </div>
-                </div>
+                        </Box>
+                    </Box>
+                </Box>
 
-                {/* Bottom */}
-                <div className="border-t border-border pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-muted-foreground gap-4">
-                    <p>© 2025 K-TECH POS. All rights reserved.</p>
+                <Box
+                    sx={{
+                        borderTop: "1px solid #E5E7EB",
+                        pt: 3,
+                        display: "flex",
+                        flexDirection: { xs: "column", md: "row" },
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: 2,
+                        fontSize: 14,
+                        color: "#6B7280",
+                    }}
+                >
+                    <Typography sx={{ fontSize: 13 }}>
+                        © 2025 K-TECH POS. All rights reserved.
+                    </Typography>
 
-                    <div className="flex gap-6">
-            <span className="hover:text-foreground cursor-pointer transition">
-              {t("footer.privacy")}
-            </span>
-                        <span className="hover:text-foreground cursor-pointer transition">
-              {t("footer.terms")}
-            </span>
-                    </div>
-                </div>
-            </div>
-        </footer>
+                    <Box sx={{ display: "flex", gap: 3 }}>
+                        <Typography sx={{ cursor: "pointer", "&:hover": { color: "#24c648" } }}>
+                            {t("footer.privacy")}
+                        </Typography>
+                        <Typography sx={{ cursor: "pointer", "&:hover": { color: "#24c648" } }}>
+                            {t("footer.terms")}
+                        </Typography>
+                    </Box>
+                </Box>
+            </Box>
+        </Box>
     );
 };
 

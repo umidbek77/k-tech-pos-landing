@@ -1,81 +1,136 @@
-import {useLanguage} from '@/contexts/LanguageContext';
-import {motion} from 'framer-motion';
-import {Headphones} from 'lucide-react';
-import {Accordion, AccordionContent, AccordionItem, AccordionTrigger,} from '@/components/ui/accordion';
+import { useLanguage } from "@/contexts/LanguageContext";
+import { motion } from "framer-motion";
+import { Headphones } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Box, Typography } from "@mui/material";
 
 const SupportFAQ = () => {
   const { t } = useLanguage();
 
   const faqs = [
-    { q: t('faq.q1'), a: t('faq.a1') },
-    { q: t('faq.q2'), a: t('faq.a2') },
-    { q: t('faq.q3'), a: t('faq.a3') },
+    { q: t("faq.q1"), a: t("faq.a1") },
+    { q: t("faq.q2"), a: t("faq.a2") },
+    { q: t("faq.q3"), a: t("faq.a3") },
   ];
 
   return (
-      <section id="faq" className="py-24 bg-background">
-        <div className="container mx-auto px-4 max-w-6xl">
+      <Box
+          component="section"
+          id="faq"
+          sx={{
+            py: { xs: 4, md: 6 },
+          }}
+      >
+        <Box sx={{ maxWidth: 1400, mx: "auto", px: 2 }}>
 
-          {/* TITLE */}
-          <motion.h2
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-3xl md:text-4xl font-semibold text-center mb-3 text-foreground"
-          >
-            {t('support.title')}
-          </motion.h2>
-
-          {/* SUBTEXT */}
-          <p className="text-center text-muted-foreground mb-10 max-w-2xl mx-auto">
-            {t('support.guarantee')}
-          </p>
-
-          {/* GUARANTEE */}
           <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-6 bg-muted/40 border border-border rounded-2xl px-6 py-5 flex items-center gap-4 shadow-sm"
           >
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-primary/10">
-              <Headphones className="h-5 w-5 text-primary" />
-            </div>
+            <Typography
+                sx={{
+                  textAlign: "center",
+                  fontSize: { xs: 28, md: 36 },
+                  fontWeight: 600,
+                  mb: 1,
+                }}
+            >
+              {t("support.title")}
+            </Typography>
 
-            <p className="text-lg text-foreground font-semibold leading-snug">
-              {t('support.guarantee')}
-            </p>
+            <Typography
+                sx={{
+                  textAlign: "center",
+                  mb: 6,
+                  maxWidth: 600,
+                  mx: "auto",
+                  fontSize: 16,
+                }}
+            >
+              {t("support.guarantee")}
+            </Typography>
           </motion.div>
 
-          {/* FAQ */}
           <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
           >
-            <Accordion type="single" collapsible className="space-y-4">
+            <Box
+                sx={{
+                  mb: 4,
+                  px: 3,
+                  py: 2.5,
+                  borderRadius: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  backgroundColor: "rgba(0,0,0,0.04)",
+                  border: "1px solid #E5E7EB",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.05)",
+                }}
+            >
+              <Box
+                  sx={{
+                    width: 42,
+                    height: 42,
+                    borderRadius: "12px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "rgba(34,197,94,0.1)",
+                  }}
+              >
+                <Headphones size={18} color="#22C55E" />
+              </Box>
 
-              {faqs.map((faq, i) => (
-                  <AccordionItem
-                      key={i}
-                      value={`item-${i}`}
-                      className="border border-border rounded-xl px-6 bg-white/50 backdrop-blur-sm shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/40"
-                  >
-                    <AccordionTrigger className="py-5 text-lg font-medium text-foreground hover:no-underline">
-                      {faq.q}
-                    </AccordionTrigger>
+              <Typography
+                  sx={{
+                    fontSize: 18,
+                    fontWeight: 600,
+                  }}
+              >
+                {t("support.guarantee")}
+              </Typography>
+            </Box>
+          </motion.div>
 
-                    <AccordionContent className="pb-5 text-base text-muted-foreground leading-relaxed">
-                      {faq.a}
-                    </AccordionContent>
-                  </AccordionItem>
-              ))}
+          <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+          >
+            <Accordion type="single" collapsible>
+
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                {faqs.map((faq, i) => (
+                    <AccordionItem
+                        key={i}
+                        value={`item-${i}`}
+                        className="border border-border rounded-xl px-6 backdrop-blur-sm shadow-sm transition-all duration-300 hover:shadow-md hover:border-primary/40"
+                    >
+                      <AccordionTrigger className="py-5 text-lg font-medium text-foreground hover:no-underline">
+                        {faq.q}
+                      </AccordionTrigger>
+
+                      <AccordionContent className="pb-5 text-base text-muted-foreground leading-relaxed">
+                        {faq.a}
+                      </AccordionContent>
+                    </AccordionItem>
+                ))}
+              </Box>
 
             </Accordion>
           </motion.div>
 
-        </div>
-      </section>
+        </Box>
+      </Box>
   );
 };
 

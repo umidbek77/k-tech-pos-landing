@@ -1,4 +1,4 @@
-import {useLanguage} from "@/contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export function Industries() {
     const { t } = useLanguage();
@@ -29,22 +29,27 @@ export function Industries() {
     return (
         <section
             id="industries"
-            className="py-18 bg-gradient-to-b from-background via-muted/20 to-background dark:via-muted/10 mb-8"
+            className="py-6 bg-gradient-to-b from-background via-muted/20 to-background dark:via-muted/10 mb-10"
         >
-            <div className="container mx-auto px-2">
-                <div className="text-center mb-6">
-                    <h2 className="text-xl md:text-4xl font-bold mb-2">
+            <div className="container mx-auto px-3">
+                <div className="text-center mb-10">
+                    <h2 className="text-2xl md:text-4xl font-bold">
                         {t("industries.title")}?
                     </h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {industries.map((industry, index) => (
                         <div
                             key={index}
-                            className="group relative overflow-hidden rounded-2xl border border-border bg-background dark:bg-background/80 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
+                            className="group relative overflow-hidden rounded-2xl
+              border border-border
+              bg-background dark:bg-background/80
+              transition-all duration-300
+              hover:shadow-2xl hover:-translate-y-2
+              hover:border-green-500"
                         >
-                            <div className="relative h-40 overflow-hidden">
+                            <div className="relative h-52 overflow-hidden">
                                 <img
                                     src={industry.image}
                                     alt={industry.title}
@@ -54,12 +59,12 @@ export function Industries() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                             </div>
 
-                            <div className="p-5">
-                                <h3 className="text-lg font-bold text-foreground">
+                            <div className="p-6">
+                                <h3 className="text-xl font-bold text-foreground mb-2">
                                     {industry.title}
                                 </h3>
 
-                                <p className="text-md text-muted-foreground leading-relaxed">
+                                <p className="text-base text-muted-foreground leading-relaxed">
                                     {industry.description}
                                 </p>
                             </div>

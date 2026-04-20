@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { MapPin, MessageSquare, Phone, User, AtSign } from "lucide-react";
 
-const DemoForm = () => {
+const DemoForm = ({ onSuccess }) => {
   const { t, lang } = useLanguage();
   const { toast } = useToast();
 
@@ -103,6 +103,8 @@ const DemoForm = () => {
       setLoading(false);
     }
   };
+
+    onSuccess?.();
 
   const handleChange = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
