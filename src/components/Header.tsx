@@ -4,13 +4,8 @@ import {useTheme} from 'next-themes';
 import {Menu, Moon, Sun, X} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {AnimatePresence, motion} from 'framer-motion';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select";
+import {Link} from "react-router-dom";
 
 
 const Header = () => {
@@ -48,20 +43,16 @@ const Header = () => {
         >
             <div className="container mx-auto flex items-center justify-between h-20 px-4">
 
-                {/* Logo */}
-                <a
-                    href="#"
+                <Link
+                    to="/"
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                     className="flex items-center gap-2 font-bold text-4xl tracking-tight group"
                 >
-                    {/*<div className="h-9 w-9 rounded-lg bg-primary flex items-center justify-center text-white font-semibold transition-transform group-hover:scale-105">*/}
-                    {/*    KP*/}
-                    {/*</div>*/}
                     <span className="text-foreground">
-            K-TECH <span className="text-primary">POS</span>
-          </span>
-                </a>
+                        K-TECH <span className="text-primary">POS</span>
+                    </span>
+                </Link>
 
-                {/* Desktop Nav */}
                 <nav className="hidden lg:flex items-center gap-6">
                     {navItems.map((item) => (
                         <button
@@ -74,10 +65,8 @@ const Header = () => {
                     ))}
                 </nav>
 
-                {/* Right controls */}
                 <div className="hidden lg:flex items-center gap-4">
 
-                    {/* Lang switcher (segmented style refined) */}
                     <div className="pt-1">
                         <Select value={lang} onValueChange={(value) =>
                             setLang(value as typeof lang)
@@ -93,7 +82,6 @@ const Header = () => {
                         </Select>
                     </div>
 
-                    {/* Theme */}
                     <Button
                         variant="ghost"
                         size="icon"
@@ -104,16 +92,14 @@ const Header = () => {
                         <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                     </Button>
 
-                    {/* CTA */}
                     <Button
-                        onClick={() => scrollTo('#demo')}
+                        onClick={() => window.open("https://app.pos.k-tech.uz/authentication/login", "_blank")}
                         className="bg-primary text-lg hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all"
                     >
                         {t('nav.login')}
                     </Button>
                 </div>
 
-                {/* Mobile toggle */}
                 <button
                     className="lg:hidden text-foreground transition-transform active:scale-90"
                     onClick={() => setMobileOpen(!mobileOpen)}
@@ -122,7 +108,6 @@ const Header = () => {
                 </button>
             </div>
 
-            {/* Mobile menu */}
             <AnimatePresence>
                 {mobileOpen && (
                     <motion.div
@@ -158,22 +143,22 @@ const Header = () => {
                                 </Select>
                             </div>
 
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                                >
-                                    <Sun className="h-4 w-4 dark:hidden" />
-                                    <Moon className="h-4 w-4 hidden dark:block" />
-                                </Button>
-                            </div>
-
                             <Button
-                                onClick={() => scrollTo('#demo')}
-                                className="w-full bg-primary text-primary-foreground mt-2 shadow-md"
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                             >
-                                {t('nav.demo')}
+                                <Sun className="h-4 w-4 dark:hidden" />
+                                <Moon className="h-4 w-4 hidden dark:block" />
                             </Button>
+                        </div>
+
+                        <Button
+                            onClick={() => window.open("https://app.pos.k-tech.uz/authentication/login", "_blank")}
+                            className="w-full bg-primary text-primary-foreground mt-2 shadow-md"
+                        >
+                            {t('nav.login')}
+                        </Button>
                     </motion.div>
                 )}
             </AnimatePresence>

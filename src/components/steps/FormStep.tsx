@@ -1,6 +1,6 @@
-import {useState} from "react";
-import {Box, Button, Divider, InputAdornment, TextField, Typography,} from "@mui/material";
-import {AtSign, Building2, CreditCard, FileText, Hash, MapPin, MessageSquare, Phone, Receipt, User} from "lucide-react";
+import {useEffect, useState} from "react";
+import {Box, Button, InputAdornment, TextField, Typography} from "@mui/material";
+import {Building2, MapPin, Phone, User} from "lucide-react";
 import {useLanguage} from "@/contexts/LanguageContext";
 import {z} from "zod";
 
@@ -23,17 +23,19 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
 
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [loading, setLoading] = useState(false);
+    const [checkingPhone, setCheckingPhone] = useState(false);
 
     const schema = z.object({
         fullName: z.string().min(2),
         phoneNumber: z.string().min(9),
-        telegramNick: z.string().optional(),
         address: z.string().min(2),
-        description: z.string().optional(),
         tenantName: z.string().min(2),
-        inn: z.string().min(9),
-        bankAccount: z.string().min(16),
-        mfo: z.string().min(5),
+
+        telegramNick: z.string().optional(),
+        description: z.string().optional(),
+        inn: z.string().optional(),
+        bankAccount: z.string().optional(),
+        mfo: z.string().optional(),
         receiptHeader: z.string().optional(),
         receiptFooter: z.string().optional(),
     });
@@ -46,6 +48,42 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
                 return "UZ_LATN";
         }
     };
+
+    const checkPhone = async (phone: string) => {
+        try {
+            const res = await fetch(
+                `https://api.pos.k-tech.uz/api/v1/contract-applications/check-pending-by-phone?phoneNumber=${phone}`,
+                {
+                    headers: { lang: mapLang() },
+                }
+            );
+
+            if (!res.ok) return null;
+            return await res.json();
+        } catch {
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const phone = form.phoneNumber;
+
+        if (!phone || phone.length < 9) return;
+
+        const timeout = setTimeout(async () => {
+            setCheckingPhone(true);
+
+            const data = await checkPhone(phone);
+
+            setCheckingPhone(false);
+
+            if (data?.tenantId) {
+                onNext(data.tenantId);
+            }
+        }, 600);
+
+        return () => clearTimeout(timeout);
+    }, [form.phoneNumber]);
 
     const handleSubmit = async () => {
         const result = schema.safeParse(form);
@@ -63,6 +101,13 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
         setLoading(true);
 
         try {
+            const check = await checkPhone(form.phoneNumber);
+
+            if (check?.tenantId) {
+                onNext(check.tenantId);
+                return;
+            }
+
             const res = await fetch(
                 "https://api.pos.k-tech.uz/api/v1/contract-applications/contract-with-tenant",
                 {
@@ -76,6 +121,7 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
             );
 
             if (!res.ok) throw new Error();
+
             const data = await res.json();
             onNext(data.tenantId);
         } catch {
@@ -96,7 +142,6 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
             "&:hover fieldset": { borderColor: "#22C55E" },
             "&.Mui-focused fieldset": { borderColor: "#22C55E" },
         },
-        "& input::placeholder": { color: "text.secondary", opacity: 1 },
     };
 
     return (
@@ -107,121 +152,90 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
                 border: "1px solid",
                 borderColor: "divider",
                 background: "background.paper",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.05)",
             }}
         >
-            <Typography sx={{ fontSize: 24, fontWeight: 600, mb: 3, color: "text.primary" }}>
+            <Typography sx={{ fontSize: 24, fontWeight: 600, mb: 3 }}>
                 {t("form.title")}
             </Typography>
 
             <Box sx={{ display: "grid", gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" }, gap: 2 }}>
 
                 <TextField
-                    fullWidth
                     placeholder={t("form.name")}
                     value={form.fullName}
                     onChange={(e) => handleChange("fullName", e.target.value)}
                     error={!!errors.fullName}
                     sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><User size={18} /></InputAdornment> } }}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <User size={18} />
+                                </InputAdornment>
+                            )
+                        }
+                    }}
                 />
 
                 <TextField
-                    fullWidth
                     placeholder={t("form.phone")}
                     value={form.phoneNumber}
                     onChange={(e) => handleChange("phoneNumber", e.target.value)}
                     error={!!errors.phoneNumber}
                     sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><Phone size={18} /></InputAdornment> } }}
+                    helperText={checkingPhone ? "Tekshirilmoqda..." : ""}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Phone size={18} />
+                                </InputAdornment>
+                            )
+                        }
+                    }}
                 />
 
                 <TextField
-                    fullWidth
-                    placeholder="@username"
-                    value={form.telegramNick}
-                    onChange={(e) => handleChange("telegramNick", e.target.value)}
-                    sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><AtSign size={18} /></InputAdornment> } }}
-                />
-
-                <TextField
-                    fullWidth
                     placeholder={t("form.address")}
                     value={form.address}
                     onChange={(e) => handleChange("address", e.target.value)}
                     error={!!errors.address}
                     sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><MapPin size={18} /></InputAdornment> } }}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <MapPin size={18} />
+                                </InputAdornment>
+                            )
+                        }
+                    }}
                 />
 
-                <Box sx={{ gridColumn: "1 / -1", color: "text.primary", fontSize: 16 }}>
-                        <Typography variant="caption" color="text.secondary">
-                            {t("form.tenantInfo")}
-                        </Typography>
-                </Box>
-
                 <TextField
-                    fullWidth
                     placeholder={t("form.tenantName")}
                     value={form.tenantName}
                     onChange={(e) => handleChange("tenantName", e.target.value)}
                     error={!!errors.tenantName}
                     sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><Building2 size={18} /></InputAdornment> } }}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <Building2 size={18} />
+                                </InputAdornment>
+                            )
+                        }
+                    }}
                 />
 
-                <TextField
-                    fullWidth
-                    placeholder={t("form.inn")}
-                    value={form.inn}
-                    onChange={(e) => handleChange("inn", e.target.value)}
-                    error={!!errors.inn}
-                    sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><Hash size={18} /></InputAdornment> } }}
-                />
+                <TextField placeholder="@username" value={form.telegramNick} onChange={(e) => handleChange("telegramNick", e.target.value)} sx={inputSx} />
+                <TextField placeholder={t("form.inn")} value={form.inn} onChange={(e) => handleChange("inn", e.target.value)} sx={inputSx} />
+                <TextField placeholder={t("form.bankAccount")} value={form.bankAccount} onChange={(e) => handleChange("bankAccount", e.target.value)} sx={inputSx} />
+                <TextField placeholder={t("form.mfo")} value={form.mfo} onChange={(e) => handleChange("mfo", e.target.value)} sx={inputSx} />
 
-                <TextField
-                    fullWidth
-                    placeholder={t("form.bankAccount")}
-                    value={form.bankAccount}
-                    onChange={(e) => handleChange("bankAccount", e.target.value)}
-                    error={!!errors.bankAccount}
-                    sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><CreditCard size={18} /></InputAdornment> } }}
-                />
-
-                <TextField
-                    fullWidth
-                    placeholder={t("form.mfo")}
-                    value={form.mfo}
-                    onChange={(e) => handleChange("mfo", e.target.value)}
-                    error={!!errors.mfo}
-                    sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><Hash size={18} /></InputAdornment> } }}
-                />
-
-                <TextField
-                    fullWidth
-                    multiline
-                    rows={2}
-                    placeholder={t("form.receiptHeader")}
-                    value={form.receiptHeader}
-                    onChange={(e) => handleChange("receiptHeader", e.target.value)}
-                    sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><Receipt size={18} /></InputAdornment> } }}
-                />
-
-                <TextField
-                    fullWidth
-                    multiline
-                    rows={2}
-                    placeholder={t("form.receiptFooter")}
-                    value={form.receiptFooter}
-                    onChange={(e) => handleChange("receiptFooter", e.target.value)}
-                    sx={inputSx}
-                    slotProps={{ input: { startAdornment: <InputAdornment position="start"><FileText size={18} /></InputAdornment> } }}
-                />
+                <TextField multiline rows={2} placeholder={t("form.receiptHeader")} value={form.receiptHeader} onChange={(e) => handleChange("receiptHeader", e.target.value)} sx={inputSx} />
+                <TextField multiline rows={2} placeholder={t("form.receiptFooter")} value={form.receiptFooter} onChange={(e) => handleChange("receiptFooter", e.target.value)} sx={inputSx} />
 
                 <Box sx={{ gridColumn: "1 / -1" }}>
                     <TextField
@@ -232,7 +246,6 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
                         value={form.description}
                         onChange={(e) => handleChange("description", e.target.value)}
                         sx={inputSx}
-                        slotProps={{ input: { startAdornment: <InputAdornment position="start"><MessageSquare size={18} /></InputAdornment> } }}
                     />
                 </Box>
 
@@ -243,14 +256,9 @@ const FormStep = ({ onNext }: { onNext: (tenantId: number) => void }) => {
                         onClick={handleSubmit}
                         sx={{
                             height: 48,
-                            mt: 1,
                             background: "#16A34A",
                             color: "#fff",
                             fontWeight: 600,
-                            textTransform: "none",
-                            borderRadius: "10px",
-                            "&:hover": { background: "#15803D" },
-                            "&.Mui-disabled": { background: "rgba(34,197,94,0.25)", color: "#065F46" },
                         }}
                     >
                         {loading ? t("form.loading") : t("common.next")}

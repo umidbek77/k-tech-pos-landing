@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button";
 import {ArrowRight, Play} from "lucide-react";
 import {Box, Typography} from "@mui/material";
 
-const images = ["/img-1.png", "/img-2.png", "/img-3.png"];
+const images = ["/desk.png", "/cloud.png", "/mobil.png"];
 
 const HeroSection = () => {
     const { t } = useLanguage();
@@ -12,21 +12,21 @@ const HeroSection = () => {
         <Box
             id="hero"
             sx={{
-                pt: { xs: 12, md: 18 },
-                pb: { xs: 2, md: 4 },
+                pt: { xs: 10, sm: 12, md: 16, lg: 18 },
+                pb: { xs: 4, md: 6 },
             }}
         >
             <Box
                 sx={{
                     maxWidth: "1400px",
                     mx: "auto",
-                    px: 2,
+                    px: { xs: 2, sm: 3 },
                 }}
             >
-                <Box sx={{ textAlign: "center", maxWidth: 1200, mx: "auto" }}>
+                <Box sx={{ textAlign: "center", maxWidth: 1400, mx: "auto" }}>
                     <Typography
                         sx={{
-                            fontSize: { xs: 30, md: 52, lg: 64 },
+                            fontSize: { xs: 28, sm: 36, md: 52, lg: 64 },
                             fontWeight: 700,
                             lineHeight: 1.15,
                         }}
@@ -96,7 +96,7 @@ const HeroSection = () => {
                         sx={{
                             mt: 2,
                             color: "text.secondary",
-                            fontSize: { xs: 15, md: 18 },
+                            fontSize: { xs: 14, sm: 16, md: 18 },
                             maxWidth: 650,
                             mx: "auto",
                         }}
@@ -107,26 +107,25 @@ const HeroSection = () => {
                     <Box
                         sx={{
                             mt: 4,
-                            pl:3,
-                            pr:3,
-                            position: "relative",
-                            zIndex: 2,
+                            display: "flex",
+                            justifyContent: "center",
                         }}
                     >
                         <Box
                             sx={{
                                 display: "flex",
-                                justifyContent: "center",
                                 gap: 2,
                                 flexDirection: { xs: "column", sm: "row" },
+                                width: { xs: "100%", sm: "auto" },
+                                maxWidth: 420,
                             }}
                         >
-                            <Button className="h-12 px-8 shadow-md text-md">
+                            <Button className="h-12 w-full sm:w-auto px-6 shadow-md text-md">
                                 {t("hero.cta1")}
                                 <ArrowRight className="ml-2 h-4 w-4" />
                             </Button>
 
-                            <Button variant="outline" className="h-12 px-8 text-md">
+                            <Button variant="outline" className="h-12 w-full sm:w-auto px-6 text-md">
                                 <Play className="mr-2 h-4 w-4" />
                                 {t("hero.cta2")}
                             </Button>
@@ -136,12 +135,13 @@ const HeroSection = () => {
 
                 <Box
                     sx={{
-                        mt: -8,
+                        mt: { xs: 2, md: 4 },
                         display: "grid",
-                        gap: 3,
+                        gap: { xs: 2, md: 3 },
                         gridTemplateColumns: {
-                            xs: "1.2fr",
-                            md: "1fr 2.3fr 1fr",
+                            xs: "1fr",
+                            sm: "1fr 1fr",
+                            md: "1.2fr 2fr 1fr",
                         },
                         alignItems: "stretch",
                     }}
@@ -152,15 +152,23 @@ const HeroSection = () => {
                             sx={{
                                 overflow: "hidden",
                                 borderRadius: "20px",
+
                                 height:
                                     index === 1
-                                        ? { xs: 280, md: 320 }
-                                        : { xs: 340, md: 400 },
-                                transform: index === 1 ? "translateY(80px)" : "none",
+                                        ? { xs: 240, sm: 260, md: 320 }
+                                        : { xs: 260, sm: 300, md: 380 },
+
+                                transform:
+                                    index === 1
+                                        ? { xs: "none", md: "translateY(40px)" }
+                                        : "none",
+
                                 boxShadow:
                                     index === 1
-                                        ? "0 10px 30px rgba(0,0,0,0.1)"
+                                        ? "0 8px 25px rgba(0,0,0,0.1)"
                                         : "0 20px 40px rgba(0,0,0,0.15)",
+
+                                transition: "0.3s",
                             }}
                         >
                             <Box
@@ -171,9 +179,15 @@ const HeroSection = () => {
                                     width: "100%",
                                     height: "100%",
                                     objectFit: "cover",
-                                    transition: "0.5s",
+                                    objectPosition:
+                                        index === 0
+                                            ? "center 20%"
+                                            : index === 1
+                                                ? "center 30%"
+                                                : "center 35%",
+                                    transition: "0.4s ease",
                                     "&:hover": {
-                                        transform: "scale(1.05)",
+                                        transform: "scale(1.04)",
                                     },
                                 }}
                             />

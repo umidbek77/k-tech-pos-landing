@@ -1,13 +1,6 @@
-import { useLanguage } from "@/contexts/LanguageContext";
-import {
-    Instagram,
-    Mail,
-    MapPin,
-    Phone,
-    Send,
-    Youtube,
-} from "lucide-react";
-import { Box, Typography } from "@mui/material";
+import {useLanguage} from "@/contexts/LanguageContext";
+import {Instagram, Mail, MapPin, Phone, Send, Youtube,} from "lucide-react";
+import {Box, Typography} from "@mui/material";
 
 const Footer = () => {
     const { t } = useLanguage();
@@ -22,21 +15,23 @@ const Footer = () => {
             sx={{
                 borderTop: "1px solid #D2D1D1FF",
                 backdropFilter: "blur(12px)",
-                pt: 8,
-                pb: 4,
+                pt: { xs: 6, md: 8 },
+                pb: { xs: 4, md: 4 },
             }}
         >
-            <Box sx={{ maxWidth: 1400, mx: "auto", px: 2 }}>
+            <Box sx={{ maxWidth: 1400, mx: "auto", px: { xs: 2, sm: 3 } }}>
 
                 <Box
                     sx={{
                         display: "grid",
                         gridTemplateColumns: {
                             xs: "1fr",
+                            sm: "1fr 1fr",
                             md: "repeat(4,1fr)",
                         },
-                        gap: 6,
+                        gap: { xs: 4, sm: 5, md: 6 },
                         mb: 4,
+                        textAlign: { xs: "center", md: "left" },
                     }}
                 >
                     <Box>
@@ -44,39 +39,27 @@ const Footer = () => {
                             sx={{
                                 display: "flex",
                                 alignItems: "center",
+                                justifyContent: { xs: "center", md: "flex-start" },
                                 gap: 1.5,
                                 mb: 2,
                                 cursor: "pointer",
                             }}
                         >
-                            {/*<Box*/}
-                            {/*    sx={{*/}
-                            {/*        width: 36,*/}
-                            {/*        height: 36,*/}
-                            {/*        borderRadius: "10px",*/}
-                            {/*        background: "#45af74",*/}
-                            {/*        color: "#fff",*/}
-                            {/*        display: "flex",*/}
-                            {/*        alignItems: "center",*/}
-                            {/*        justifyContent: "center",*/}
-                            {/*        fontWeight: 700,*/}
-                            {/*        fontSize: 20,*/}
-                            {/*    }}*/}
-                            {/*>*/}
-                            {/*    KP*/}
-                            {/*</Box>*/}
-
-                            <Typography sx={{ fontWeight: 700, fontSize: 34 }}>
-                                K-TECH <Box component="span" sx={{ color: "#45af74" }}>POS</Box>
+                            <Typography sx={{ fontWeight: 700, fontSize: { xs: 26, md: 34 } }}>
+                                K-TECH{" "}
+                                <Box component="span" sx={{ color: "#45af74" }}>
+                                    POS
+                                </Box>
                             </Typography>
                         </Box>
 
                         <Typography
                             sx={{
-                                fontSize: 16,
+                                fontSize: { xs: 14, md: 16 },
                                 color: "#6B7280",
                                 lineHeight: 1.6,
-                                maxWidth: 260,
+                                maxWidth: { xs: "100%", md: 260 },
+                                mx: { xs: "auto", md: 0 },
                             }}
                         >
                             {t("footer.slogan")}
@@ -84,13 +67,7 @@ const Footer = () => {
                     </Box>
 
                     <Box>
-                        <Typography
-                            sx={{
-                                fontSize: 18,
-                                fontWeight: 600,
-                                mb: 2,
-                            }}
-                        >
+                        <Typography sx={{ fontSize: 18, fontWeight: 600, mb: 2 }}>
                             {t("footer.product")}
                         </Typography>
 
@@ -103,14 +80,12 @@ const Footer = () => {
                                 key={item.href}
                                 onClick={() => scrollTo(item.href)}
                                 sx={{
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     color: "#6B7280",
                                     mb: 1.5,
                                     cursor: "pointer",
                                     transition: "0.3s",
-                                    "&:hover": {
-                                        color: "#24c648",
-                                    },
+                                    "&:hover": { color: "#24c648" },
                                 }}
                             >
                                 {item.label}
@@ -119,13 +94,7 @@ const Footer = () => {
                     </Box>
 
                     <Box>
-                        <Typography
-                            sx={{
-                                fontSize: 18,
-                                fontWeight: 600,
-                                mb: 2,
-                            }}
-                        >
+                        <Typography sx={{ fontSize: 18, fontWeight: 600, mb: 2 }}>
                             {t("footer.contact")}
                         </Typography>
 
@@ -139,14 +108,13 @@ const Footer = () => {
                                 sx={{
                                     display: "flex",
                                     alignItems: "center",
+                                    justifyContent: { xs: "center", md: "flex-start" },
                                     gap: 1.5,
                                     mb: 1.5,
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     color: "#6B7280",
                                     transition: "0.3s",
-                                    "&:hover": {
-                                        color: "#24c648",
-                                    },
+                                    "&:hover": { color: "#24c648" },
                                 }}
                             >
                                 <item.icon size={16} color="#22C55E" />
@@ -156,23 +124,23 @@ const Footer = () => {
                     </Box>
 
                     <Box>
-                        <Typography
-                            sx={{
-                                fontSize: 18,
-                                fontWeight: 600,
-                                mb: 2,
-                            }}
-                        >
+                        <Typography sx={{ fontSize: 18, fontWeight: 600, mb: 2 }}>
                             {t("footer.social")}
                         </Typography>
 
-                        <Box sx={{ display: "flex", gap: 1.5 }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: { xs: "center", md: "flex-start" },
+                                gap: 1.5,
+                            }}
+                        >
                             {[Send, Instagram, Youtube].map((Icon, i) => (
                                 <Box
                                     key={i}
                                     sx={{
-                                        width: 42,
-                                        height: 42,
+                                        width: 40,
+                                        height: 40,
                                         borderRadius: "10px",
                                         border: "1px solid #E5E7EB",
                                         display: "flex",
@@ -202,6 +170,7 @@ const Footer = () => {
                         justifyContent: "space-between",
                         alignItems: "center",
                         gap: 2,
+                        textAlign: { xs: "center", md: "left" },
                         fontSize: 14,
                         color: "#6B7280",
                     }}

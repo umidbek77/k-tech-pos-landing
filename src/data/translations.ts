@@ -70,7 +70,13 @@ export type TranslationKey =
     | 'invoice.created' | 'invoice.createdDesc'
     | 'invoice.invoiceId' | 'invoice.tenantId' | 'invoice.amount'
     | 'invoice.plan' | 'invoice.status' | 'invoice.expiredAt' | 'invoice.plansError'
-
+    | 'invoice.status.PAID'
+    | 'invoice.status.UNPAID'
+    | 'invoice.status.CANCELLED'
+    | 'invoice.status.PENDING'
+    | 'invoice.status.SUCCESS'
+    |'invoice.activateDesc' |'invoice.activateBtn'|'invoice.invoiceNumber'|'invoice.activateTitle'|'common.back'
+    |"support.subtitle"
 type Translations = Record<string, Record<TranslationKey, string>>;
 
 export const translations: Translations = {
@@ -159,9 +165,9 @@ export const translations: Translations = {
     'pricing.enterprise.f7': '24/7 premium support',
     'social.badge': "100+ do'kon allaqachon avtomatlashtirilgan",
     'support.title': "Qo'llab-quvvatlash",
-    'support.guarantee': "Texnik yordam 15 daqiqada javob beradi. O'zbek va rus tillarida bepul ta'lim.",
+    "support.guarantee": "Texnik yordam 15 daqiqa ichida javob beradi va o‘zbek, rus, ingliz tillarida yordam ko‘rsatadi.",
     'faq.q1': "Ma'lumotlarni ko'chirish qanchalik oson?",
-    'faq.a1': "Bizning mutaxassislarimiz barcha ma'lumotlaringizni bepul ko'chirib beradi. Excel, 1C yoki boshqa tizimlardan import qilish mumkin.",
+    'faq.a1': "Bizning mutaxassislarimiz barcha ma'lumotlaringizni ko'chirib beradi. Excel, 1C yoki boshqa tizimlardan import qilish mumkin.",
     'faq.q2': "Soliq (GNK) integratsiyasi bormi?",
     'faq.a2': "Ha, K-TECH POS to'liq GNK va soliq tizimi bilan integratsiyalashgan.",
     'faq.q3': 'Internet uzilganda nima bo\'ladi?',
@@ -263,6 +269,17 @@ export const translations: Translations = {
     'invoice.status': "Status",
     'invoice.expiredAt': "Muddati",
     'invoice.plansError': "Tariflarni yuklashda xatolik yuz berdi.",
+    'invoice.activateTitle': 'Faollashtirish',
+    'invoice.activateDesc': 'Tarif tanlangan. Davom etish uchun faollashtiring',
+    'invoice.activateBtn': 'Faollashtirish',
+    'invoice.invoiceNumber': 'Ariza raqami',
+    'invoice.status.PAID': 'To‘langan',
+    'invoice.status.UNPAID': 'To‘lanmagan',
+    'invoice.status.CANCELLED': 'Bekor qilingan',
+    'invoice.status.PENDING': 'Kutilmoqda',
+    'invoice.status.SUCCESS': 'Muvaffaqiyatli',
+    'common.back': 'Orqaga',
+    "support.subtitle": "Savollaringiz bo‘lsa, biz sizga tez va qulay tarzda yordam berishga tayyormiz."
   },
   ru: {
     'nav.features': 'Возможности',
@@ -349,9 +366,9 @@ export const translations: Translations = {
     'pricing.enterprise.f7': '24/7 премиум поддержка',
     'social.badge': '100+ магазинов уже автоматизировано',
     'support.title': 'Поддержка',
-    'support.guarantee': 'Техподдержка отвечает за 15 минут. Бесплатное обучение на узбекском и русском.',
+    "support.guarantee": "Техподдержка отвечает в течение 15 минут и помогает на узбекском, русском и английском языках.",
     'faq.q1': 'Насколько легко перенести данные?',
-    'faq.a1': 'Наши специалисты бесплатно перенесут все ваши данные. Импорт из Excel, 1C и других систем.',
+    'faq.a1': 'Наши специалисты перенесут все ваши данные. Импорт из Excel, 1C и других систем.',
     'faq.q2': 'Есть интеграция с налоговой (ГНК)?',
     'faq.a2': 'Да, K-TECH POS полностью интегрирован с ГНК и налоговой системой.',
     'faq.q3': 'Что произойдёт при отключении интернета?',
@@ -453,6 +470,17 @@ export const translations: Translations = {
     'invoice.status': "Статус",
     'invoice.expiredAt': "Срок действия",
     'invoice.plansError': "Ошибка при загрузке тарифов. Попробуйте снова.",
+    'invoice.activateTitle': 'Активация',
+    'invoice.activateDesc': 'Тариф выбран. Продолжите активацию',
+    'invoice.activateBtn': 'Активировать',
+    'invoice.invoiceNumber': 'Номер заявки',
+    'invoice.status.PAID': 'Оплачено',
+    'invoice.status.UNPAID': 'Не оплачено',
+    'invoice.status.CANCELLED': 'Отменено',
+    'invoice.status.PENDING': 'В ожидании',
+    'invoice.status.SUCCESS': 'Успешно',
+    'common.back': 'Назад',
+    "support.subtitle": "Если у вас есть вопросы, мы готовы быстро и удобно помочь вам."
   },
   en: {
     'nav.features': 'WhyUs',
@@ -539,9 +567,9 @@ export const translations: Translations = {
     'pricing.enterprise.f7': '24/7 premium support',
     'social.badge': '100+ stores already automated',
     'support.title': 'Support',
-    'support.guarantee': 'Technical support responds within 15 minutes. Free training in Uzbek and Russian.',
+    "support.guarantee": "Technical support responds within 15 minutes and provides assistance in Uzbek, Russian, and English.",
     'faq.q1': 'How easy is data migration?',
-    'faq.a1': 'Our specialists will migrate all your data for free. Import from Excel, 1C, and other systems.',
+    'faq.a1': 'Our specialists will migrate all your data. Import from Excel, 1C, and other systems.',
     'faq.q2': 'Is there tax (GNK) integration?',
     'faq.a2': 'Yes, K-TECH POS is fully integrated with GNK and the tax system.',
     'faq.q3': 'What happens when internet goes down?',
@@ -643,5 +671,16 @@ export const translations: Translations = {
     'invoice.status': "Status",
     'invoice.expiredAt': "Expires at",
     'invoice.plansError': "Failed to load plans. Please try again.",
+    'invoice.activateTitle': 'Activation',
+    'invoice.activateDesc': 'Plan selected. Continue activation',
+    'invoice.activateBtn': 'Activate',
+    'invoice.invoiceNumber': 'Invoice Number',
+    'invoice.status.PAID': 'Paid',
+    'invoice.status.UNPAID': 'Unpaid',
+    'invoice.status.CANCELLED': 'Cancelled',
+    'invoice.status.PENDING': 'Pending',
+    'invoice.status.SUCCESS': 'Success',
+    'common.back': 'Back',
+    "support.subtitle": "If you have any questions, we’re ready to assist you quickly and conveniently."
   },
 };
